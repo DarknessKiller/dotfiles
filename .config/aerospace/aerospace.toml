@@ -119,8 +119,20 @@ alt-shift-semicolon = 'mode service'
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [[on-window-detected]]
-if.app-id = 'com.bitwarden.desktop'
+if.app-id = 'app.zen-browser.zen'
+if.window-title-regex-substring = 'Picture-in-Picture'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = 'Picture-in-picture'
+run = 'layout floating'
+check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-id = 'cc.ffitch.shottr'
@@ -131,7 +143,7 @@ if.app-id = 'com.jordanbaird.ice'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
+if.app-id = 'com.bitwarden.desktop'
 run = ['layout floating']
 
 [[on-window-detected]]
@@ -140,6 +152,10 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.alienator88.Pearcleaner'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
 run = ['layout floating']
 
 [[on-window-detected]]
