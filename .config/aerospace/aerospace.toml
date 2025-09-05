@@ -139,7 +139,7 @@ if.app-id = 'cc.ffitch.shottr'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = 'com.jordanbaird.ice'
+if.app-id = 'com.jordanbaird.Ice'
 run = ['layout floating']
 
 [[on-window-detected]]
