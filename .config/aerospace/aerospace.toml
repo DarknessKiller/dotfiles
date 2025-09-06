@@ -151,11 +151,15 @@ if.app-id = 'com.wireguard.MacOS'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = 'com.alienator88.Pearcleaner'
+if.app-id = 'com.obsproject.obs-studio'
 run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.alienator88.Pearcleaner'
 run = ['layout floating']
 
 [[on-window-detected]]
