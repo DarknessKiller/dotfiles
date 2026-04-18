@@ -11,6 +11,26 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 sed -i.bak 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
 
+# Install Zsh Autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+sed -i.bak -E \
+-e '/^plugins=\(/ { /zsh-autosuggestions/! s/\)/ zsh-autosuggestions)/; }' \
+~/.zshrc
+
+# Install Zsh Syntax Highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+sed -i.bak -E \
+-e '/^plugins=\(/ { /zsh-syntax-highlighting/! s/\)/ zsh-syntax-highlighting)/; }' \
+~/.zshrc
+
+# Disable History Timestamp & Share History
+mkdir -p $ZSH_CUSTOM/lib
+cp ~/.oh-my-zsh/lib/history.zsh $ZSH_CUSTOM/lib/history.zsh
+sed -i.bak -E \
+-e '/^[[:space:]]*#/! s/^[[:space:]]*setopt[[:space:]]+extended_history/# &/' \
+-e '/^[[:space:]]*#/! s/^[[:space:]]*setopt[[:space:]]+share_history/# &/' \
+"$ZSH_CUSTOM/lib/history.zsh"
+
 # Battery Toolkit
 brew tap mhaeuser/mhaeuser
 brew install battery-toolkit
