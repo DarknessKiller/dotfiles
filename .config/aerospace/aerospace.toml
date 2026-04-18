@@ -1,72 +1,123 @@
-# ~/.aerospace.toml
+# ~/.config/aerospace/aerospace.toml
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃ Core Settings                                      ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-after-startup-command = []
 start-at-login = true
 
-enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
 
 accordion-padding = 30
 default-root-container-layout = 'tiles'
-default-root-container-orientation = 'auto'
+default-root-container-orientation = 'horizontal'
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = [
-  # 'move-mouse window-lazy-center',
-  'exec-and-forget sketchybar --trigger aerospace_focus_change',
+  'move-mouse window-lazy-center'
+  # 'exec-and-forget sketchybar --trigger aerospace_focus_change',
 ]
 
-automatically-unhide-macos-hidden-apps = false
+automatically-unhide-macos-hidden-apps = true
 
 [key-mapping]
-    preset = 'qwerty'
+preset = 'qwerty'
+
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃ Gaps                                               ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [gaps]
 inner.horizontal = 3
 inner.vertical = 3
 outer.left = 5
+outer.right = 5
 outer.top = 5
 outer.bottom = 5
-outer.right = 5
+
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃ Main Binding Mode                                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 [mode.main.binding]
 
-# ── Launchers ─────────────────────────────────────────
-alt-enter = 'exec-and-forget open -n -a iTerm' # iTerm
-alt-e = 'exec-and-forget open ~'        # File manager
-alt-space = 'exec-and-forget open -a Raycast' # App launcher
+# ─────────────────────────────────────────────────────
+# Launchers
+# ─────────────────────────────────────────────────────
 
-# ── Window Actions ────────────────────────────────────
+alt-enter = 'exec-and-forget open -a iTerm'
+alt-e = 'exec-and-forget open ~'
+alt-space = 'exec-and-forget open -a Raycast'
+
+# ─────────────────────────────────────────────────────
+# Window Snapping
+# ─────────────────────────────────────────────────────
+
+# Halves
+ctrl-alt-left  = ['split horizontal', 'focus left']
+ctrl-alt-right = ['split horizontal', 'focus right']
+ctrl-alt-up    = ['split vertical', 'focus up']
+ctrl-alt-down  = ['split vertical', 'focus down']
+
+# Corners
+ctrl-alt-u = ['split horizontal', 'focus left', 'split vertical', 'focus up']
+ctrl-alt-i = ['split horizontal', 'focus right', 'split vertical', 'focus up']
+ctrl-alt-j = ['split horizontal', 'focus left', 'split vertical', 'focus down']
+ctrl-alt-k = ['split horizontal', 'focus right', 'split vertical', 'focus down']
+
+# Thirds
+ctrl-alt-1 = ['split horizontal', 'focus left']
+ctrl-alt-2 = ['split horizontal', 'focus right', 'split horizontal', 'focus left']
+ctrl-alt-3 = ['split horizontal', 'focus right']
+
+# Sixths
+ctrl-alt-shift-1 = ['split horizontal', 'focus left', 'split vertical', 'focus up']
+ctrl-alt-shift-2 = ['split horizontal', 'focus right', 'split horizontal', 'focus left', 'split vertical', 'focus up']
+ctrl-alt-shift-3 = ['split horizontal', 'focus right', 'split vertical', 'focus up']
+
+ctrl-alt-shift-4 = ['split horizontal', 'focus left', 'split vertical', 'focus down']
+ctrl-alt-shift-5 = ['split horizontal', 'focus right', 'split horizontal', 'focus left', 'split vertical', 'focus down']
+ctrl-alt-shift-6 = ['split horizontal', 'focus right', 'split vertical', 'focus down']
+
+
+# ─────────────────────────────────────────────────────
+# Window
+# ─────────────────────────────────────────────────────
+
+ctrl-alt-enter = 'fullscreen'
+ctrl-alt-c = ['layout floating', 'resize smart -300', 'move-mouse window-force-center']
+ctrl-alt-minus = 'resize smart -50'
+ctrl-alt-equal = 'resize smart +50'
+
+ctrl-alt-tab = 'workspace-back-and-forth'
 alt-q = 'close'
-#alt-shift-m = 'exec-and-forget loginctl terminate-user ""'
-alt-v = 'layout floating tiling' # toggle floating/tiling
-alt-f = 'fullscreen'
-alt-j = 'layout tiles horizontal vertical'
-alt-k = 'layout accordion horizontal vertical'
-alt-tab = 'workspace-back-and-forth'
-alt-period = 'workspace next'
-alt-comma  = 'workspace prev'
 
-# ── Focus Movement ────────────────────────────────────
-alt-left  = 'focus left'
-alt-right = 'focus right'
-alt-up    = 'focus up'
-alt-down  = 'focus down'
 
-# ── Window Movement ───────────────────────────────────
+# ─────────────────────────────────────────────────────
+# Focus
+# ─────────────────────────────────────────────────────
+
+alt-h = 'focus left'
+alt-l = 'focus right'
+alt-k = 'focus up'
+alt-j = 'focus down'
+
+
+# ─────────────────────────────────────────────────────
+# Move
+# ─────────────────────────────────────────────────────
+
 alt-shift-left  = 'move left'
 alt-shift-right = 'move right'
 alt-shift-up    = 'move up'
 alt-shift-down  = 'move down'
 
-# ── Resize ────────────────────────────────────────────
-alt-minus = 'resize smart -50'
-alt-equal = 'resize smart +50'
 
-# ── Workspaces ────────────────────────────────────────
+# ─────────────────────────────────────────────────────
+# Workspaces
+# ─────────────────────────────────────────────────────
+
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
@@ -78,7 +129,6 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 10'
 
-# ── Workspaces Move ───────────────────────────────────────
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
@@ -90,50 +140,52 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
 
+alt-period = 'workspace next'
+alt-comma  = 'workspace prev'
+
 alt-shift-period = 'move-workspace-to-monitor --wrap-around next'
-alt-shift-comma = 'move-workspace-to-monitor --wrap-around prev'
+alt-shift-comma  = 'move-workspace-to-monitor --wrap-around prev'
+
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃ Service Binding Mode                                ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
 alt-shift-semicolon = 'mode service'
 
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main']
-    f = ['layout floating tiling', 'mode main']
+    f = ['flatten-workspace-tree', 'mode main']
+    r = ['layout floating tiling', 'mode main']
+    j = ['layout tiles horizontal vertical', 'mode main']
+    k = ['layout accordion horizontal vertical', 'mode main']
     backspace = ['close-all-windows-but-current', 'mode main']
 
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-h = ['join-with left', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
-
-    down = 'volume down'
-    up = 'volume up'
-    shift-down = ['volume set 0', 'mode main']
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃ Window Configuration                                ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-[[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-
+# Chrome PiP
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 if.window-title-regex-substring = 'Picture-in-picture'
 run = 'layout floating'
 check-further-callbacks = true
 
+# Helium PiP
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+if.window-title-regex-substring = "Picture in Picture"
+run = "layout floating"
+check-further-callbacks = true
+
+# Utilities
 [[on-window-detected]]
 if.app-id = 'cc.ffitch.shottr'
 run = ['layout floating']
