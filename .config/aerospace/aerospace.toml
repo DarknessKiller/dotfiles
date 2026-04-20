@@ -1,12 +1,12 @@
 # ~/.config/aerospace/aerospace.toml
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃ Core Settings                                      ┃
+# ┃ Core Settings                                       ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 start-at-login = true
 
-enable-normalization-flatten-containers = false
-enable-normalization-opposite-orientation-for-nested-containers = false
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
 
 accordion-padding = 30
 default-root-container-layout = 'tiles'
@@ -25,16 +25,16 @@ preset = 'qwerty'
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃ Gaps                                               ┃
+# ┃ Gaps                                                ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [gaps]
-inner.horizontal = 3
-inner.vertical = 3
-outer.left = 5
-outer.right = 5
-outer.top = 5
-outer.bottom = 5
+inner.horizontal = 5
+inner.vertical = 5
+outer.left = 7
+outer.right = 7
+outer.top = 6
+outer.bottom = 6
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -46,8 +46,10 @@ outer.bottom = 5
 # Launchers
 # ─────────────────────────────────────────────────────
 
-alt-enter = 'exec-and-forget osascript -e "tell application \"iTerm\" to create window with default profile" && osascript -e "tell application \"iTerm\" to activate"'
+alt-enter = 'exec-and-forget osascript -e "tell application \"iTerm\" to create window with default profile"'
 alt-e = "exec-and-forget osascript -e 'tell application \"Finder\" to make new Finder window to (path to home folder)'"
+alt-b = "exec-and-forget osascript -e 'tell application \"Helium\" to make new window'"
+ctrl-alt-b = "exec-and-forget osascript -e 'tell application \"Helium\" to make new window with properties {mode:\"incognito\"}'"
 alt-space = 'exec-and-forget open -a Raycast'
 
 # ─────────────────────────────────────────────────────
