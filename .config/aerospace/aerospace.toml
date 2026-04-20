@@ -46,8 +46,8 @@ outer.bottom = 5
 # Launchers
 # ─────────────────────────────────────────────────────
 
-alt-enter = 'exec-and-forget open -a iTerm'
-alt-e = 'exec-and-forget open ~'
+alt-enter = 'exec-and-forget osascript -e "tell application \"iTerm\" to create window with default profile" && osascript -e "tell application \"iTerm\" to activate"'
+alt-e = "exec-and-forget osascript -e 'tell application \"Finder\" to make new Finder window to (path to home folder)'"
 alt-space = 'exec-and-forget open -a Raycast'
 
 # ─────────────────────────────────────────────────────
@@ -130,10 +130,10 @@ alt-shift-semicolon = 'mode service'
     k = ['layout accordion horizontal vertical', 'mode main']
     backspace = ['close-all-windows-but-current', 'mode main']
 
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+    alt-shift-up = ['join-with up', 'mode main']
+    alt-shift-down = ['join-with down', 'mode main']
+    alt-shift-left = ['join-with left', 'mode main']
+    alt-shift-right = ['join-with right', 'mode main']
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
