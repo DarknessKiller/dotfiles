@@ -51,37 +51,6 @@ alt-e = 'exec-and-forget open ~'
 alt-space = 'exec-and-forget open -a Raycast'
 
 # ─────────────────────────────────────────────────────
-# Window Snapping
-# ─────────────────────────────────────────────────────
-
-# Halves
-ctrl-alt-left  = ['split horizontal', 'focus left']
-ctrl-alt-right = ['split horizontal', 'focus right']
-ctrl-alt-up    = ['split vertical', 'focus up']
-ctrl-alt-down  = ['split vertical', 'focus down']
-
-# Corners
-ctrl-alt-u = ['split horizontal', 'focus left', 'split vertical', 'focus up']
-ctrl-alt-i = ['split horizontal', 'focus right', 'split vertical', 'focus up']
-ctrl-alt-j = ['split horizontal', 'focus left', 'split vertical', 'focus down']
-ctrl-alt-k = ['split horizontal', 'focus right', 'split vertical', 'focus down']
-
-# Thirds
-ctrl-alt-1 = ['split horizontal', 'focus left']
-ctrl-alt-2 = ['split horizontal', 'focus right', 'split horizontal', 'focus left']
-ctrl-alt-3 = ['split horizontal', 'focus right']
-
-# Sixths
-ctrl-alt-shift-1 = ['split horizontal', 'focus left', 'split vertical', 'focus up']
-ctrl-alt-shift-2 = ['split horizontal', 'focus right', 'split horizontal', 'focus left', 'split vertical', 'focus up']
-ctrl-alt-shift-3 = ['split horizontal', 'focus right', 'split vertical', 'focus up']
-
-ctrl-alt-shift-4 = ['split horizontal', 'focus left', 'split vertical', 'focus down']
-ctrl-alt-shift-5 = ['split horizontal', 'focus right', 'split horizontal', 'focus left', 'split vertical', 'focus down']
-ctrl-alt-shift-6 = ['split horizontal', 'focus right', 'split vertical', 'focus down']
-
-
-# ─────────────────────────────────────────────────────
 # Window
 # ─────────────────────────────────────────────────────
 
@@ -92,16 +61,17 @@ ctrl-alt-equal = 'resize smart +50'
 
 ctrl-alt-tab = 'workspace-back-and-forth'
 alt-q = 'close'
+ctrl-alt-q = ['close-all-windows-but-current', 'mode main']
 
 
 # ─────────────────────────────────────────────────────
 # Focus
 # ─────────────────────────────────────────────────────
 
-alt-h = 'focus left'
-alt-l = 'focus right'
-alt-k = 'focus up'
-alt-j = 'focus down'
+ctrl-alt-left = 'focus left'
+ctrl-alt-right = 'focus right'
+ctrl-alt-up = 'focus up'
+ctrl-alt-down = 'focus down'
 
 
 # ─────────────────────────────────────────────────────
@@ -159,7 +129,7 @@ alt-shift-semicolon = 'mode service'
     r = ['layout floating tiling', 'mode main']
     j = ['layout tiles horizontal vertical', 'mode main']
     k = ['layout accordion horizontal vertical', 'mode main']
-    backspace = ['close-all-windows-but-current', 'mode main']
+    #backspace = ['close-all-windows-but-current', 'mode main']
 
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-j = ['join-with down', 'mode main']
