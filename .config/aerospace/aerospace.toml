@@ -61,7 +61,6 @@ ctrl-alt-equal = 'resize smart +50'
 
 ctrl-alt-tab = 'workspace-back-and-forth'
 alt-q = 'close'
-ctrl-alt-q = ['close-all-windows-but-current', 'mode main']
 
 
 # ─────────────────────────────────────────────────────
@@ -129,7 +128,7 @@ alt-shift-semicolon = 'mode service'
     r = ['layout floating tiling', 'mode main']
     j = ['layout tiles horizontal vertical', 'mode main']
     k = ['layout accordion horizontal vertical', 'mode main']
-    #backspace = ['close-all-windows-but-current', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
 
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-j = ['join-with down', 'mode main']
