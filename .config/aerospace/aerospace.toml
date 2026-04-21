@@ -46,10 +46,44 @@ outer.bottom = 6
 # Launchers
 # ─────────────────────────────────────────────────────
 
-alt-enter = 'exec-and-forget osascript -e "tell application \"iTerm\" to create window with default profile"'
-alt-e = "exec-and-forget osascript -e 'tell application \"Finder\" to make new Finder window to (path to home folder)'"
-alt-b = "exec-and-forget osascript -e 'tell application \"Helium\" to make new window'"
-ctrl-alt-b = "exec-and-forget osascript -e 'tell application \"Helium\" to make new window with properties {mode:\"incognito\"}'"
+alt-enter = '''
+exec-and-forget osascript -e '
+tell application "iTerm"
+    activate
+    create window with default profile
+end tell
+'
+'''
+alt-e = '''
+exec-and-forget osascript -e '
+tell application "Finder"
+    activate
+    make new Finder window to (path to home folder)
+end tell
+'
+'''
+alt-b = '''
+exec-and-forget osascript -e '
+tell application "Helium"
+    if it is running then
+        make new window
+        activate
+    else
+        activate
+        delay 0.8
+    end if
+end tell
+'
+'''
+ctrl-alt-b = '''
+exec-and-forget osascript -e '
+tell application "Helium"
+    if it is running then
+        make new window with properties {mode:"incognito"}
+    end if
+end tell
+'
+'''
 alt-space = 'exec-and-forget open -a Raycast'
 
 # ─────────────────────────────────────────────────────
