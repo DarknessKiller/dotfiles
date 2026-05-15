@@ -8,33 +8,38 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-accordion-padding = 30
+accordion-padding = 0
 default-root-container-layout = 'tiles'
-default-root-container-orientation = 'horizontal'
+default-root-container-orientation = 'auto'
 
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focused-monitor-changed = [
+    'move-mouse monitor-lazy-center'
+]
+
 on-focus-changed = [
-  'move-mouse window-lazy-center'
+    'move-mouse window-lazy-center'
   # 'exec-and-forget sketchybar --trigger aerospace_focus_change',
 ]
+
+after-startup-command = ['layout tiles', 'exec-and-forget borders active_color=0xFF007AFF inactive_color=0xff494d64 width=6.0']
+
 
 automatically-unhide-macos-hidden-apps = true
 
 [key-mapping]
 preset = 'qwerty'
 
-
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃ Gaps                                                ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [gaps]
-inner.horizontal = 5
-inner.vertical = 5
-outer.left = 7
-outer.right = 7
-outer.top = 6
-outer.bottom = 6
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.right = 8
+outer.top = 8
+outer.bottom = 8
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -59,28 +64,6 @@ exec-and-forget osascript -e '
 tell application "Finder"
     activate
     make new Finder window to (path to home folder)
-end tell
-'
-'''
-alt-b = '''
-exec-and-forget osascript -e '
-tell application "Helium"
-    if it is running then
-        make new window
-        activate
-    else
-        activate
-        delay 0.8
-    end if
-end tell
-'
-'''
-ctrl-alt-b = '''
-exec-and-forget osascript -e '
-tell application "Helium"
-    if it is running then
-        make new window with properties {mode:"incognito"}
-    end if
 end tell
 '
 '''
@@ -134,22 +117,22 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 10'
 
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
-alt-shift-0 = 'move-node-to-workspace 10'
+alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+alt-shift-0 = 'move-node-to-workspace --focus-follows-window 10'
 
 alt-period = 'workspace next'
 alt-comma  = 'workspace prev'
 
-alt-shift-period = 'move-workspace-to-monitor --wrap-around next'
-alt-shift-comma  = 'move-workspace-to-monitor --wrap-around prev'
+ctrl-alt-period = 'move-workspace-to-monitor --wrap-around next'
+ctrl-alt-comma  = 'move-workspace-to-monitor --wrap-around prev'
 
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -190,6 +173,12 @@ if.window-title-regex-substring = "Picture in Picture"
 run = "layout floating"
 check-further-callbacks = true
 
+# Outlook Reminders
+[[on-window-detected]]
+if.app-id = "com.microsoft.Outlook"
+if.window-title-regex-substring = "Reminder"
+run = ["layout floating"]
+
 # Utilities
 [[on-window-detected]]
 if.app-id = 'cc.ffitch.shottr'
@@ -225,4 +214,8 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.titanium.Onyx'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
 run = ['layout floating']
