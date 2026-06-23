@@ -1,67 +1,168 @@
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Install ITerm2
-brew install --cask iterm2
+log() {
+  echo "[install] $1"
+}
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
 
-# Install Powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-sed -i.bak 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+brew_install() {
+  if brew list --formula | grep -q "^$1$"; then
+    log "$1 already installed (formula)"
+  else
+    log "Installing $1"
+    brew install "$1"
+  fi
+}
 
-# Install Zsh Autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-sed -i.bak -E \
--e '/^plugins=\(/ { /zsh-autosuggestions/! s/\)/ zsh-autosuggestions)/; }' \
-~/.zshrc
+brew_cask_install() {
+  if brew list --cask | grep -q "^$1$"; then
+    log "$1 already installed (cask)"
+  else
+    log "Installing $1"
+    brew install --cask "$1"
+  fi
+}
 
-# Install Zsh Syntax Highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-sed -i.bak -E \
--e '/^plugins=\(/ { /zsh-syntax-highlighting/! s/\)/ zsh-syntax-highlighting)/; }' \
-~/.zshrc
+mas_install() {
+  local app_id="$1"
+  local name="$2"
 
-# Disable History Timestamp & Share History
-mkdir -p $ZSH_CUSTOM/lib
-cp ~/.oh-my-zsh/lib/history.zsh $ZSH_CUSTOM/lib/history.zsh
-sed -i.bak -E \
--e '/^[[:space:]]*#/! s/^[[:space:]]*setopt[[:space:]]+extended_history/# &/' \
--e '/^[[:space:]]*#/! s/^[[:space:]]*setopt[[:space:]]+share_history/# &/' \
-"$ZSH_CUSTOM/lib/history.zsh"
+  if mas list | awk '{print $1}' | grep -q "^${app_id}$"; then
+    log "$name already installed"
+  else
+    log "Installing $name"
+    mas install "$app_id"
+  fi
+}
 
-# Battery Toolkit
+########################################
+# Homebrew
+########################################
+if ! command_exists brew; then
+  log "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  log "Homebrew already installed"
+fi
+
+########################################
+# Fish
+########################################
+brew_install fish
+
+FISH_PATH="$(which fish)"
+
+if ! grep -q "$FISH_PATH" /etc/shells; then
+  log "Adding fish to /etc/shells"
+  echo "$FISH_PATH" | sudo tee -a /etc/shells
+fi
+
+########################################
+# Fisher
+########################################
+if [ ! -f "$HOME/.config/fish/functions/fisher.fish" ]; then
+  log "Installing Fisher"
+  fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; and fisher install jorgebucaran/fisher'
+else
+  log "Fisher already installed"
+fi
+
+########################################
+# Tide (Fish prompt)
+########################################
+if ! fish -c "fisher list" | grep -q "tide"; then
+  log "Installing Tide theme"
+  fish -c "fisher install IlanCosman/tide@v6"
+else
+  log "Tide already installed"
+fi
+
+# Run tide configure only if not already configured
+if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
+  log "Running Tide configuration (interactive)"
+  fish -c "tide configure"
+else
+  log "Tide already configured"
+fi
+
+########################################
+# Zed theme setup
+########################################
+log "Setting up Zed theme symlink"
+
+mkdir -p "$HOME/.config/zed/themes"
+
+if [ ! -L "$HOME/.config/zed/themes/cwal.json" ]; then
+  if [ -f "$HOME/.cache/cwal/colors-zed.json" ]; then
+    ln -s "$HOME/.cache/cwal/colors-zed.json" "$HOME/.config/zed/themes/cwal.json"
+    log "Zed theme linked"
+  else
+    log "Warning: ~/.cache/cwal/colors-zed.json not found"
+  fi
+else
+  log "Zed theme symlink already exists"
+fi
+
+########################################
+# CLI tools
+########################################
 brew tap mhaeuser/mhaeuser
-brew install battery-toolkit
+brew_install battery-toolkit
+brew_install neovim
 
-# Shottr
-brew install --cask shottr
+########################################
+# GUI apps
+########################################
+brew_cask_install ghostty
+brew_cask_install shottr
+brew_cask_install jordanbaird-ice
+brew_cask_install istat-menus
+brew_cask_install linearmouse
+brew_cask_install nikitabobko/tap/aerospace
+brew_cask_install tabby
+brew_cask_install zed
+brew_cask_install vscodium
 
-# Ice Bar
-brew install --cask jordanbaird-ice
+########################################
+# Mac App Store
+########################################
+if ! command_exists mas; then
+  log "Installing mas CLI"
+  brew_install mas
+fi
 
-# IStat Menus 7
-brew install --cask istat-menus
+mas_install 1352778147 "Bitwarden"
+mas_install 1451685025 "WireGuard"
 
-# LinearMouse
-brew install --cask linearmouse
+########################################
+# Done
+########################################
+log "Setup complete"
 
-# Aerospace (i3 tiles)
-brew install --cask nikitabobko/tap/aerospace
+GHOSTTY_THEME_PATH="$HOME/.cache/cwal/colors-ghostty.conf"
 
-# Tabby
-brew install --cask tabby
+cat <<EOF
 
-# MacOS App Store Apps
-mas install 1352778147 # Bitwarden
-mas install 1451685025 # Wireguard
+Next step: configure Ghostty manually
 
-# Zed Editor
-brew install --cask zed
+Add the following to your Ghostty config:
 
-# VSCodium
-brew install --cask vscodium
+theme = "$GHOSTTY_THEME_PATH"
 
-# Neovim
-brew install neovim
+# aesthetics
+background-opacity = 0.85
+background-blur = 16
+
+# typography
+font-size = 16
+font-thicken = true
+font-thicken-strength = 1
+adjust-cell-height = 1
+
+EOF
+
+log "Run: chsh -s $(which fish) to set fish as default shell"

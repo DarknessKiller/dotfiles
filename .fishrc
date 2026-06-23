@@ -1,0 +1,27 @@
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
+export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+
+# my abbrs
+abbr -a pwdcp 'pwd | pbcopy'
+abbr -a hc 'history clear'
+abbr -a hcs 'history clear-session'
+abbr -a ts 'date +"%Y%m%d-%H%M%S"'
+abbr -a vim 'nvim'
+abbr -a vi 'nvim'
+
+# git abbrs
+abbr -a gs git status
+abbr -a ga git add .
+abbr -a gc git commit -m
+abbr -a gp git push
+abbr -a gpl git pull
+abbr -a gco git checkout
+abbr -a gcb git checkout -b
+abbr -a gl git log --oneline --graph --decorate --all
+
+source ~/.cache/cwal/colors.fish
+# Only needed if you want override shell colors
+# sh ~/.cache/cwal/terminal.sh
