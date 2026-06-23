@@ -113,6 +113,8 @@ fi
 brew tap mhaeuser/mhaeuser
 brew_install battery-toolkit
 brew_install neovim
+brew tap darknesskiller/cwal
+brew_install cwal
 
 ########################################
 # GUI apps
