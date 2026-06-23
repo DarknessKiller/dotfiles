@@ -27,3 +27,5 @@ abbr -a gcb 'git checkout -b'
 abbr -a gl 'git log --oneline --graph --decorate --all'
 
 source ~/.cache/cwal/colors.fish
+# Only needed if you want override shell colors
+# sh ~/.cache/cwal/terminal.sh
