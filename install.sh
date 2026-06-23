@@ -115,6 +115,9 @@ brew_install battery-toolkit
 brew_install neovim
 brew tap darknesskiller/cwal
 brew_install cwal
+brew_install yazi
+brew_install fzf
+brew_install opencode
 
 ########################################
 # GUI apps
