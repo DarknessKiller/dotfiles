@@ -131,6 +131,7 @@ brew_cask_install nikitabobko/tap/aerospace
 brew_cask_install tabby
 brew_cask_install zed
 brew_cask_install vscodium
+brew_cask_install font-meslo-for-powerlevel10k
 
 ########################################
 # Mac App Store
