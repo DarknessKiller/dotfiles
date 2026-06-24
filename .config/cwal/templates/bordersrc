@@ -1,0 +1,9 @@
+options=(
+    style=round
+    width=10.0
+    hidpi=true
+    active_color={foreground.xhex}{alpha.hex}
+    inactive_color={background.xhex}{alpha.hex}
+)
+
+borders "${options[@]}"

@@ -113,6 +113,8 @@ fi
 brew tap mhaeuser/mhaeuser
 brew_install battery-toolkit
 brew_install neovim
+brew tap FelixKratz/formulae
+brew install borders
 brew tap darknesskiller/cwal
 brew_install cwal
 brew_install yazi
@@ -143,6 +145,20 @@ fi
 
 mas_install 1352778147 "Bitwarden"
 mas_install 1451685025 "WireGuard"
+
+########################################
+# JankyBorders setup
+########################################
+log "Setting up JankyBorders colors symlink"
+
+mkdir -p "$HOME/.config/borders
+
+if [ -f "$HOME/.cache/cwal/bordersrc" ]; then
+    ln -s "$HOME/.cache/cwal/bordersrc" "$HOME/.config/borders/bordersrc"
+    log "Zed theme linked"
+  else
+    log "Warning: ~/.cache/cwal/bordersrc not found"
+fi
 
 ########################################
 # Done
