@@ -1,19 +1,20 @@
+-- Catppuccin Macchiato + dynamic accents
 return {
     wallpaper = "{wallpaper}",
 
-    background = "{background}",
+    background = "#24273a",
     foreground = "{foreground}",
-    cursor = "{cursor}",
+    cursor = "{color4}",
 
-    color0 = "{color0}",
+    color0 = "#181926",
     color1 = "{color1}",
     color2 = "{color2}",
     color3 = "{color3}",
     color4 = "{color4}",
     color5 = "{color5}",
     color6 = "{color6}",
-    color7 = "{color7}",
-    color8 = "{color8}",
+    color7 = "{foreground}",
+    color8 = "#1e2030",
     color9 = "{color9}",
     color10 = "{color10}",
     color11 = "{color11}",

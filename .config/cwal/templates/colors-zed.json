@@ -1,104 +1,120 @@
 {
-    "name": "cwal",
-    "author": "cwal",
-    "themes": [
-        {
-            "name": "cwal",
-            "appearance": "dark",
-            "style": {
-                "background": "{background}90",
-                "editor.background": "{background}90",
-                "editor.foreground": "{foreground}",
-                "text": "{foreground}",
-                "text.muted": "{foreground}70",
-                "text.ignored": "{foreground}40",
-                "text.placeholder": "{foreground}50",
-                "ignored": "{foreground}30",
-                "element.hover": "{foreground}30",
-                "ghost_element.hover": "{color1}30",
-                "ghost_element.selected": "{color1}30",
-                "ghost_element.active": "{color1}60",
-                "border": "{background}",
-                "editor.highlighted_line.background": "{color1}10",
-                "editor.active_line.background": "{color1}10",
-                "panel.background": "{background}90",
-                "title_bar.background": "{background}90",
-                "title_bar.inactive_background": "{background}90",
-                "status_bar.background": "{background}90",
-                "drop_target.background": "{background}90",
-                "elevated_surface.background": "{background}",
-                "toolbar.background": "{background}90",
-                "tab_bar.background": "{background}90",
-                "tab.inactive_background": "{background}90",
-                "tab.active_background": "{color1}30",
-                "scrollbar.track.background": "transparent",
-                "scrollbar.track.border": "{background}",
-                "scrollbar.thumb.background": "{color1}",
-                "editor.gutter.background": "{background}90",
-                "terminal.background": "{background}10",
-                "terminal.foreground": "{foreground}",
-                "terminal.dim_foreground": "{foreground}",
-                "terminal.bright_foreground": "{foreground}",
-                "terminal.ansi.black": "{color0}",
-                "terminal.ansi.red": "{color1}",
-                "terminal.ansi.green": "{color2}",
-                "terminal.ansi.yellow": "{color3}",
-                "terminal.ansi.blue": "{color4}",
-                "terminal.ansi.magenta": "{color5}",
-                "terminal.ansi.cyan": "{color6}",
-                "terminal.ansi.white": "{color7}",
-                "terminal.ansi.bright_black": "{color8}",
-                "terminal.ansi.bright_red": "{color9}",
-                "terminal.ansi.bright_green": "{color10}",
-                "terminal.ansi.bright_yellow": "{color11}",
-                "terminal.ansi.bright_blue": "{color12}",
-                "terminal.ansi.bright_magenta": "{color13}",
-                "terminal.ansi.bright_cyan": "{color14}",
-                "terminal.ansi.bright_white": "{color15}",
-                "modified": "{color1}",
-                "syntax": {
-                    "attribute": {
-                        "color": "{color1}"
-                    },
-                    "boolean": {
-                      "color": "{color2}"
-                    },
-                    "comment": {
-                      "color": "{color8}"
-                    },
-                    "comment.doc": {
-                      "color": "{color8}"
-                    },
-                    "constant": {
-                      "color": "{color10}"
-                    },
-                    "function": {
-                      "color": "{color14}"
-                    },
-                    "keyword": {
-                      "color": "{color4}"
-                    },
-                    "number": {
-                      "color": "{color5}"
-                    },
-                    "operator": {
-                      "color": "{color4}"
-                    },
-                    "string": {
-                      "color": "{color1}"
-                    },
-                    "variable": {
-                      "color": "{color2}"
-                    }
-                },
-                "players": [
-                  {
-                    "cursor": "{color1}",
-                    "background": "{background}",
-                    "selection": "{color1}30"
-                  }
-                ]
-            }
-        }
-    ]
+  "name": "cwal",
+  "author": "cwal",
+  "themes": [
+    {
+      "name": "cwal",
+      "appearance": "dark",
+      "style": {
+        "background": "#24273a",
+        "editor.background": "#24273a",
+        "editor.foreground": "{foreground}",
+
+        "text": "{foreground}",
+        "text.muted": "{color8}",
+        "text.ignored": "{color8}",
+        "text.placeholder": "{color7}",
+        "ignored": "{color8}",
+
+        "element.hover": "#363a4f",
+        "ghost_element.hover": "{color5}30",
+        "ghost_element.selected": "{color5}40",
+        "ghost_element.active": "{color5}70",
+
+        "border": "#363a4f",
+
+        "editor.highlighted_line.background": "{color4}15",
+        "editor.active_line.background": "{color4}15",
+
+        "panel.background": "#1e2030",
+        "title_bar.background": "#181926",
+        "title_bar.inactive_background": "#181926",
+        "status_bar.background": "#181926",
+
+        "drop_target.background": "{color4}30",
+
+        "elevated_surface.background": "#1e2030",
+        "toolbar.background": "#1e2030",
+        "tab_bar.background": "#181926",
+
+        "tab.inactive_background": "#181926",
+        "tab.active_background": "{color5}30",
+
+        "scrollbar.track.background": "transparent",
+        "scrollbar.track.border": "#363a4f",
+        "scrollbar.thumb.background": "{color4}",
+
+        "editor.gutter.background": "#24273a",
+
+        "terminal.background": "#24273a",
+        "terminal.foreground": "{foreground}",
+        "terminal.dim_foreground": "{color8}",
+        "terminal.bright_foreground": "{color15}",
+
+        "terminal.ansi.black": "#181926",
+        "terminal.ansi.red": "{color1}",
+        "terminal.ansi.green": "{color2}",
+        "terminal.ansi.yellow": "{color3}",
+        "terminal.ansi.blue": "{color4}",
+        "terminal.ansi.magenta": "{color5}",
+        "terminal.ansi.cyan": "{color6}",
+        "terminal.ansi.white": "{foreground}",
+
+        "terminal.ansi.bright_black": "#363a4f",
+        "terminal.ansi.bright_red": "{color9}",
+        "terminal.ansi.bright_green": "{color10}",
+        "terminal.ansi.bright_yellow": "{color11}",
+        "terminal.ansi.bright_blue": "{color12}",
+        "terminal.ansi.bright_magenta": "{color13}",
+        "terminal.ansi.bright_cyan": "{color14}",
+        "terminal.ansi.bright_white": "{color15}",
+
+        "modified": "{color5}",
+
+        "syntax": {
+          "attribute": {
+            "color": "{color6}"
+          },
+          "boolean": {
+            "color": "{color5}"
+          },
+          "comment": {
+            "color": "{foreground}80"
+          },
+          "comment.doc": {
+            "color": "{foreground}80"
+          },
+          "constant": {
+            "color": "{color13}"
+          },
+          "function": {
+            "color": "{color4}"
+          },
+          "keyword": {
+            "color": "{color5}"
+          },
+          "number": {
+            "color": "{color3}"
+          },
+          "operator": {
+            "color": "{color6}"
+          },
+          "string": {
+            "color": "{color2}"
+          },
+          "variable": {
+            "color": "{foreground}"
+          }
+        },
+
+        "players": [
+          {
+            "cursor": "{color4}",
+            "background": "#24273a",
+            "selection": "{color5}40"
+          }
+        ]
+      }
+    }
+  ]
 }

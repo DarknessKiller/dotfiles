@@ -1,9 +1,11 @@
+# Catppuccin Macchiato + dynamic accents
+
 options=(
     style=round
     width=10.0
     hidpi=true
-    active_color={foreground.xhex}{alpha.hex}
-    inactive_color={background.xhex}{alpha.hex}
+    active_color={color5.xhex}{alpha.hex}
+    inactive_color=#363a4f{alpha.hex}
 )
 
 borders "${options[@]}"
