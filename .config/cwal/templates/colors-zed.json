@@ -16,6 +16,10 @@
         "text.placeholder": "{color7}",
         "ignored": "{color8}",
 
+        "hint": "#acb0be",
+        "hint.border": "#acb0be",
+        "hint.background": "#e6e9ef",
+
         "element.hover": "#363a4f",
         "ghost_element.hover": "{color5}30",
         "ghost_element.selected": "{color5}40",
@@ -50,7 +54,7 @@
         "terminal.foreground": "{foreground}",
         "terminal.dim_foreground": "{color8}",
         "terminal.bright_foreground": "{color15}",
-
+        
         "terminal.ansi.black": "#181926",
         "terminal.ansi.red": "{color1}",
         "terminal.ansi.green": "{color2}",
@@ -59,7 +63,6 @@
         "terminal.ansi.magenta": "{color5}",
         "terminal.ansi.cyan": "{color6}",
         "terminal.ansi.white": "{foreground}",
-
         "terminal.ansi.bright_black": "#363a4f",
         "terminal.ansi.bright_red": "{color9}",
         "terminal.ansi.bright_green": "{color10}",
@@ -68,9 +71,7 @@
         "terminal.ansi.bright_magenta": "{color13}",
         "terminal.ansi.bright_cyan": "{color14}",
         "terminal.ansi.bright_white": "{color15}",
-
         "modified": "{color5}",
-
         "syntax": {
           "attribute": {
             "color": "{color6}"
@@ -106,7 +107,6 @@
             "color": "{foreground}"
           }
         },
-
         "players": [
           {
             "cursor": "{color4}",
