@@ -155,7 +155,7 @@ mkdir -p "$HOME/.config/borders
 
 if [ -f "$HOME/.cache/cwal/bordersrc" ]; then
     ln -s "$HOME/.cache/cwal/bordersrc" "$HOME/.config/borders/bordersrc"
-    log "Zed theme linked"
+    log "JankyBorders theme linked"
   else
     log "Warning: ~/.cache/cwal/bordersrc not found"
 fi
