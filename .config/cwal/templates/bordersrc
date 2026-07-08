@@ -2,8 +2,8 @@ options=(
     style=round
     width=10.0
     hidpi=true
-    active_color={foreground.xhex}{alpha.hex}
-    inactive_color={background.xhex}{alpha.hex}
+    active_color=0x{alpha.hex}{color1.strip}
+    inactive_color=0x{alpha.hex}{background.strip}
 )
 
 borders "${options[@]}"
