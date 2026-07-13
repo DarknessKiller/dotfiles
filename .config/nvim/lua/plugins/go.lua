@@ -29,7 +29,8 @@ return {
     config = function()
         require("codeium").setup({
           virtual_text = {
-          enabled = true
+            accept_fallback = "<Tab>",
+            enabled = true
         }
       })
     end
