@@ -1,7 +1,6 @@
-# Enviroments Variables
-export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
 export EDITOR=nvim
 
