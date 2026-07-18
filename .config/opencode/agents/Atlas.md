@@ -1,17 +1,17 @@
-# AGENTS.md
+# Atlas.md
 
 ## Table of Contents
 
-* [AGENTS.md / Core Principles](#agentsmd--core-principles)
-* [AGENTS.md / Context Propagation](#agentsmd--context-propagation)
-* [AGENTS.md / Go Style](#agentsmd--go-style)
-* [AGENTS.md / Architecture](#agentsmd--architecture)
-* [AGENTS.md / Error Handling](#agentsmd--error-handling)
-* [AGENTS.md / Testing](#agentsmd--testing)
-* [AGENTS.md / Fish Shell](#agentsmd--fish-shell)
-* [AGENTS.md / Git](#agentsmd--git)
-* [AGENTS.md / Generated Code Expectations](#agentsmd--generated-code-expectations)
-* [AGENTS.md / Clarification Policy](#agentsmd--clarification-policy)
+* [Atlas.md / Core Principles](#agentsmd--core-principles)
+* [Atlas.md / Context Propagation](#agentsmd--context-propagation)
+* [Atlas.md / Go Style](#agentsmd--go-style)
+* [Atlas.md / Architecture](#agentsmd--architecture)
+* [Atlas.md / Error Handling](#agentsmd--error-handling)
+* [Atlas.md / Testing](#agentsmd--testing)
+* [Atlas.md / Fish Shell](#agentsmd--fish-shell)
+* [Atlas.md / Git](#agentsmd--git)
+* [Atlas.md / Generated Code Expectations](#agentsmd--generated-code-expectations)
+* [Atlas.md / Clarification Policy](#agentsmd--clarification-policy)
 
 ---
 
@@ -19,7 +19,7 @@
 
 ---
 
-## AGENTS.md / Core Principles
+## Atlas.md / Core Principles
 
 * Address the user as `Xiongdi` with a friendly bro-like tone.
 * Follow priorities in order. Never sacrifice a higher priority for a lower one.
@@ -37,7 +37,7 @@ Priority order:
 
 ---
 
-## AGENTS.md / Context Propagation
+## Atlas.md / Context Propagation
 
 * Use the most appropriate context type for the current layer.
 * Propagate the existing request context through all downstream operations.
@@ -47,7 +47,7 @@ Priority order:
 
 ---
 
-## AGENTS.md / Go Style
+## Atlas.md / Go Style
 
 * Prefer explicit code over magic.
 * Prefer the standard library before introducing dependencies.
@@ -58,7 +58,7 @@ Priority order:
 
 ---
 
-## AGENTS.md / Architecture
+## Atlas.md / Architecture
 
 Preferred flow:
 
@@ -73,7 +73,7 @@ Rules:
 
 ---
 
-## AGENTS.md / Error Handling
+## Atlas.md / Error Handling
 
 * Never silently ignore errors.
 * Wrap errors with meaningful context.
@@ -81,7 +81,7 @@ Rules:
 
 ---
 
-## AGENTS.md / Testing
+## Atlas.md / Testing
 
 All new business logic should include tests.
 
@@ -100,7 +100,7 @@ Cover:
 
 ---
 
-## AGENTS.md / Fish Shell
+## Atlas.md / Fish Shell
 
 Assume fish shell unless specified otherwise.
 
@@ -109,7 +109,7 @@ Assume fish shell unless specified otherwise.
 
 ---
 
-## AGENTS.md / Git
+## Atlas.md / Git
 
 Use Conventional Commits.
 
@@ -117,7 +117,7 @@ Avoid vague commit messages.
 
 ---
 
-## AGENTS.md / Generated Code Expectations
+## Atlas.md / Generated Code Expectations
 
 Generated code should:
 
@@ -132,7 +132,7 @@ Generated code should:
 
 ---
 
-## AGENTS.md / Clarification Policy
+## Atlas.md / Clarification Policy
 
 Never invent:
 
