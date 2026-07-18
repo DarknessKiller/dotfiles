@@ -118,3 +118,37 @@ elif [ -f "$CWAL_THEME" ]; then
 else
   log "Warning: $CWAL_THEME not found"
 fi
+
+########################################
+# opencode config (individual symlinks)
+########################################
+log "Setting up opencode config symlinks"
+
+OPENCODE_DIR="$HOME/.config/opencode"
+DOTFILES_OPENCODE="$HOME/dotfiles/.config/opencode"
+
+mkdir -p "$OPENCODE_DIR"
+
+# Config files
+for f in opencode.jsonc AGENTS.md; do
+  if [ -L "$OPENCODE_DIR/$f" ]; then
+    log "opencode/$f symlink already exists"
+  elif [ -e "$OPENCODE_DIR/$f" ]; then
+    log "Warning: opencode/$f exists but is not a symlink, skipping"
+  elif [ -f "$DOTFILES_OPENCODE/$f" ]; then
+    ln -s "$DOTFILES_OPENCODE/$f" "$OPENCODE_DIR/$f"
+    log "opencode/$f linked"
+  fi
+done
+
+# Config directories
+for d in agents commands skills plugins; do
+  if [ -L "$OPENCODE_DIR/$d" ]; then
+    log "opencode/$d symlink already exists"
+  elif [ -d "$OPENCODE_DIR/$d" ]; then
+    log "Warning: opencode/$d exists but is not a symlink, skipping"
+  elif [ -d "$DOTFILES_OPENCODE/$d" ]; then
+    ln -s "$DOTFILES_OPENCODE/$d" "$OPENCODE_DIR/$d"
+    log "opencode/$d linked"
+  fi
+done
