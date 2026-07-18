@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bitbucket Helper"
+  short_description: "Draft and manage Bitbucket Server PRs"
+  default_prompt: "Use $bitbucket-helper to create a pull request with a clear description from this branch."
