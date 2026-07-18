@@ -33,7 +33,7 @@ PACKAGES=(
   ghostty
 )
 
-paru -Sy "${PACKAGES[@]}"
+paru -S --needed "${PACKAGES[@]}"
 
 ########################################
 # Fish (ensure available)
@@ -74,7 +74,7 @@ else
 fi
 
 ########################################
-# Fisher (Fish plugin manager)
+# Fisher
 ########################################
 if [ ! -f "$HOME/.config/fish/functions/fisher.fish" ]; then
   log "Installing Fisher"
@@ -84,7 +84,7 @@ else
 fi
 
 ########################################
-# Tide (Fish prompt)
+# Tide
 ########################################
 if ! fish -c "fisher list" | grep -q "^IlanCosman/tide"; then
   log "Installing Tide theme"
@@ -95,7 +95,7 @@ fi
 
 if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && \
    [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
-  log "Running Tide configuration (interactive)"
+  log "Running Tide configuration"
   fish -c "tide configure"
 else
   log "Tide already configured"
@@ -129,7 +129,7 @@ link_if_new() {
 ########################################
 # Aerospace
 ########################################
-log "Setting up Aerospace config"
+log "Setting up Aerospace"
 
 link_if_new \
   "$DOTFILES_DIR/aerospace/aerospace.toml" \
@@ -138,7 +138,7 @@ link_if_new \
 ########################################
 # Fish
 ########################################
-log "Setting up Fish config"
+log "Setting up Fish"
 
 link_if_new \
   "$DOTFILES_DIR/fish/config.fish" \
@@ -151,7 +151,7 @@ link_if_new \
 ########################################
 # Neovim
 ########################################
-log "Setting up Neovim config"
+log "Setting up Neovim"
 
 link_if_new \
   "$DOTFILES_DIR/nvim/init.lua" \
@@ -168,7 +168,7 @@ link_if_new \
 ########################################
 # Opencode
 ########################################
-log "Setting up Opencode config"
+log "Setting up Opencode"
 
 link_if_new \
   "$DOTFILES_DIR/opencode/opencode.jsonc" \
@@ -183,14 +183,12 @@ link_if_new \
   "$HOME/.config/opencode/skills"
 
 ########################################
-# Zed theme setup
+# Zed theme
 ########################################
 log "Setting up Zed theme"
 
 ZED_THEME_DIR="$HOME/.config/zed/themes"
 CWAL_THEME="$HOME/.cache/cwal/colors-zed.json"
-
-mkdir -p "$ZED_THEME_DIR"
 
 if [ -f "$CWAL_THEME" ]; then
   link_if_new "$CWAL_THEME" "$ZED_THEME_DIR/cwal.json"
