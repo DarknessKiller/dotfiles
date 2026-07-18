@@ -1,11 +1,10 @@
 source /usr/share/cachyos-fish-config/cachyos-config.fish
+set fish_greeting
 
 if test -f ~/.fishrc
     source ~/.fishrc
 end
 
-# overwrite greeting
-# potentially disabling fastfetch
-function fish_greeting
-    # smth smth
+if status is-interactive; and test $COLUMNS -ge 150; and test $LINES -ge 35
+    fastfetch
 end
