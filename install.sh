@@ -30,6 +30,7 @@ PACKAGES=(
   yazi
   fzf
   opencode
+  ghostty
 )
 
 paru -Sy "${PACKAGES[@]}"
@@ -54,7 +55,7 @@ if command_exists fish; then
   if [ "$SHELL" != "$FISH_PATH" ]; then
     log "Setting Fish as default shell"
 
-    if grep -q "$FISH_PATH" /etc/shells; then
+    if grep -qx "$FISH_PATH" /etc/shells; then
       chsh -s "$FISH_PATH" "$USER"
       log "Default shell changed to Fish"
     else
@@ -85,15 +86,15 @@ fi
 ########################################
 # Tide (Fish prompt)
 ########################################
-if ! fish -c "fisher list" | grep -q "tide"; then
+if ! fish -c "fisher list" | grep -q "^IlanCosman/tide"; then
   log "Installing Tide theme"
   fish -c "fisher install IlanCosman/tide@v6"
 else
   log "Tide already installed"
 fi
 
-# Configure Tide if not configured
-if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
+if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && \
+   [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
   log "Running Tide configuration (interactive)"
   fish -c "tide configure"
 else
@@ -101,54 +102,140 @@ else
 fi
 
 ########################################
-# Zed theme setup (cwal symlink)
+# Dotfiles config symlinks
 ########################################
-log "Setting up Zed theme symlink"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)/.config"
 
-mkdir -p "$HOME/.config/zed/themes"
+link_if_new() {
+  local src="$1"
+  local dest="$2"
 
+  mkdir -p "$(dirname "$dest")"
+
+  if [ -L "$dest" ]; then
+    log "${dest#$HOME/} already linked"
+    return
+  fi
+
+  if [ -e "$dest" ]; then
+    rm -rf "$dest"
+    log "Removed existing ${dest#$HOME/}"
+  fi
+
+  ln -s "$src" "$dest"
+  log "${dest#$HOME/} linked"
+}
+
+########################################
+# Aerospace
+########################################
+log "Setting up Aerospace config"
+
+link_if_new \
+  "$DOTFILES_DIR/aerospace/aerospace.toml" \
+  "$HOME/.config/aerospace/aerospace.toml"
+
+########################################
+# Fish
+########################################
+log "Setting up Fish config"
+
+link_if_new \
+  "$DOTFILES_DIR/fish/config.fish" \
+  "$HOME/.config/fish/config.fish"
+
+link_if_new \
+  "$DOTFILES_DIR/.fishrc" \
+  "$HOME/.fishrc"
+
+########################################
+# Neovim
+########################################
+log "Setting up Neovim config"
+
+link_if_new \
+  "$DOTFILES_DIR/nvim/init.lua" \
+  "$HOME/.config/nvim/init.lua"
+
+link_if_new \
+  "$DOTFILES_DIR/nvim/lua/config" \
+  "$HOME/.config/nvim/lua/config"
+
+link_if_new \
+  "$DOTFILES_DIR/nvim/lua/plugins" \
+  "$HOME/.config/nvim/lua/plugins"
+
+########################################
+# Opencode
+########################################
+log "Setting up Opencode config"
+
+link_if_new \
+  "$DOTFILES_DIR/opencode/opencode.jsonc" \
+  "$HOME/.config/opencode/opencode.jsonc"
+
+link_if_new \
+  "$DOTFILES_DIR/opencode/agents" \
+  "$HOME/.config/opencode/agents"
+
+link_if_new \
+  "$DOTFILES_DIR/opencode/skills" \
+  "$HOME/.config/opencode/skills"
+
+########################################
+# Zed theme setup
+########################################
+log "Setting up Zed theme"
+
+ZED_THEME_DIR="$HOME/.config/zed/themes"
 CWAL_THEME="$HOME/.cache/cwal/colors-zed.json"
-ZED_THEME_LINK="$HOME/.config/zed/themes/cwal.json"
 
-if [ -L "$ZED_THEME_LINK" ]; then
-  log "Zed theme symlink already exists"
-elif [ -f "$CWAL_THEME" ]; then
-  ln -s "$CWAL_THEME" "$ZED_THEME_LINK"
-  log "Zed theme linked"
+mkdir -p "$ZED_THEME_DIR"
+
+if [ -f "$CWAL_THEME" ]; then
+  link_if_new "$CWAL_THEME" "$ZED_THEME_DIR/cwal.json"
 else
   log "Warning: $CWAL_THEME not found"
 fi
 
 ########################################
-# opencode config (individual symlinks)
+# Ghostty config
 ########################################
-log "Setting up opencode config symlinks"
+log "Configuring Ghostty"
 
-OPENCODE_DIR="$HOME/.config/opencode"
-DOTFILES_OPENCODE="$HOME/dotfiles/.config/opencode"
+GHOSTTY_THEME_PATH="$HOME/.cache/cwal/colors-ghostty.conf"
 
-mkdir -p "$OPENCODE_DIR"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+else
+    GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
+fi
 
-# Config files
-for f in opencode.jsonc AGENTS.md; do
-  if [ -L "$OPENCODE_DIR/$f" ]; then
-    log "opencode/$f symlink already exists"
-  elif [ -e "$OPENCODE_DIR/$f" ]; then
-    log "Warning: opencode/$f exists but is not a symlink, skipping"
-  elif [ -f "$DOTFILES_OPENCODE/$f" ]; then
-    ln -s "$DOTFILES_OPENCODE/$f" "$OPENCODE_DIR/$f"
-    log "opencode/$f linked"
-  fi
-done
+GHOSTTY_CONFIG="$GHOSTTY_CONFIG_DIR/config.ghostty"
 
-# Config directories
-for d in agents commands skills plugins; do
-  if [ -L "$OPENCODE_DIR/$d" ]; then
-    log "opencode/$d symlink already exists"
-  elif [ -d "$OPENCODE_DIR/$d" ]; then
-    log "Warning: opencode/$d exists but is not a symlink, skipping"
-  elif [ -d "$DOTFILES_OPENCODE/$d" ]; then
-    ln -s "$DOTFILES_OPENCODE/$d" "$OPENCODE_DIR/$d"
-    log "opencode/$d linked"
-  fi
-done
+mkdir -p "$GHOSTTY_CONFIG_DIR"
+touch "$GHOSTTY_CONFIG"
+
+if ! grep -qF "# Added by install.sh" "$GHOSTTY_CONFIG"; then
+  cat >>"$GHOSTTY_CONFIG" <<EOF
+
+# Added by install.sh
+theme = "$GHOSTTY_THEME_PATH"
+
+# aesthetics
+background-opacity = 0.85
+background-blur = 16
+
+# typography
+font-size = 16
+font-thicken = true
+font-thicken-strength = 1
+adjust-cell-height = 1
+EOF
+
+  log "Ghostty configured"
+else
+  log "Ghostty already configured"
+fi
+
+log "Done!"
