@@ -90,6 +90,85 @@ else
 fi
 
 ########################################
+# Dotfiles config symlinks
+########################################
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)/.config"
+
+link_if_new() {
+  local src="$1" dest="$2"
+
+  if [ -L "$dest" ]; then
+    log "${dest#$HOME/} symlink already exists"
+    return
+  fi
+  if [ -e "$dest" ]; then
+    rm "$dest"
+    log "Removed existing ${dest#$HOME/}"
+  fi
+  ln -s "$src" "$dest"
+  log "${dest#$HOME/} linked"
+}
+
+########################################
+# Aerospace
+########################################
+log "Setting up aerospace config"
+
+mkdir -p "$HOME/.config/aerospace"
+
+link_if_new "$DOTFILES_DIR/aerospace/aerospace.toml" "$HOME/.config/aerospace/aerospace.toml"
+
+########################################
+# Fish
+########################################
+log "Setting up fish config"
+
+link_if_new "$DOTFILES_DIR/fish/config.fish" "$HOME/.config/fish/config.fish"
+link_if_new "$DOTFILES_DIR/.fishrc" "$HOME/.fishrc"
+
+########################################
+# Neovim
+########################################
+log "Setting up neovim config"
+
+for f in init.lua; do
+  link_if_new "$DOTFILES_DIR/nvim/$f" "$HOME/.config/nvim/$f"
+done
+
+for d in lua/config lua/plugins; do
+  if [ -L "$HOME/.config/nvim/$d" ]; then
+    log "nvim/$d symlink already exists"
+  else
+    [ -d "$HOME/.config/nvim/$d" ] && rm -rf "$HOME/.config/nvim/$d"
+    ln -s "$DOTFILES_DIR/nvim/$d" "$HOME/.config/nvim/$d"
+    log "nvim/$d linked"
+  fi
+done
+
+########################################
+# opencode
+########################################
+log "Setting up opencode config"
+
+OPENCODE_DIR="$HOME/.config/opencode"
+
+mkdir -p "$OPENCODE_DIR"
+
+for f in opencode.jsonc; do
+  link_if_new "$DOTFILES_DIR/opencode/$f" "$OPENCODE_DIR/$f"
+done
+
+for d in agents skills; do
+  if [ -L "$OPENCODE_DIR/$d" ]; then
+    log "opencode/$d symlink already exists"
+  else
+    [ -d "$OPENCODE_DIR/$d" ] && rm -rf "$OPENCODE_DIR/$d"
+    ln -s "$DOTFILES_DIR/opencode/$d" "$OPENCODE_DIR/$d"
+    log "opencode/$d linked"
+  fi
+done
+
+########################################
 # Zed theme setup
 ########################################
 log "Setting up Zed theme symlink"
@@ -151,7 +230,7 @@ mas_install 1451685025 "WireGuard"
 ########################################
 log "Setting up JankyBorders colors symlink"
 
-mkdir -p "$HOME/.config/borders
+mkdir -p "$HOME/.config/borders"
 
 if [ -f "$HOME/.cache/cwal/bordersrc" ]; then
     ln -s "$HOME/.cache/cwal/bordersrc" "$HOME/.config/borders/bordersrc"
