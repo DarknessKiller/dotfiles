@@ -9,6 +9,27 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+brew_install_from_tap() {
+  local tap="$1"
+  local formula="$2"
+
+  if ! brew tap | grep -qx "$tap"; then
+    log "Tapping $tap"
+    brew tap "$tap"
+  fi
+
+  if brew list --formula | grep -qx "$formula"; then
+    log "$formula already installed"
+    return
+  fi
+
+  log "Trusting $tap/$formula"
+  brew trust "$tap/$formula"
+
+  log "Installing $formula"
+  brew install "$tap/$formula"
+}
+
 brew_install() {
   if brew list --formula | grep -q "^$1$"; then
     log "$1 already installed (formula)"
@@ -16,6 +37,27 @@ brew_install() {
     log "Installing $1"
     brew install "$1"
   fi
+}
+
+brew_cask_install_from_tap() {
+  local tap="$1"
+  local cask="$2"
+
+  if ! brew tap | grep -qx "$tap"; then
+    log "Tapping $tap"
+    brew tap "$tap"
+  fi
+
+  if brew list --cask | grep -qx "$cask"; then
+    log "$cask already installed"
+    return
+  fi
+
+  log "Trusting $tap/$cask"
+  brew trust "$tap/$cask"
+
+  log "Installing $cask"
+  brew install --cask "$tap/$cask"
 }
 
 brew_cask_install() {
@@ -50,15 +92,82 @@ else
 fi
 
 ########################################
-# Fish
+# CLI tools
 ########################################
+log "Installing CLI tools"
+
 brew_install fish
+brew_install neovim
+brew_install yazi
+brew_install fzf
+brew_install opencode
+brew_install borders
 
-FISH_PATH="$(which fish)"
+brew_install_from_tap \
+  mhaeuser/mhaeuser \
+  battery-toolkit
 
-if ! grep -q "$FISH_PATH" /etc/shells; then
-  log "Adding fish to /etc/shells"
-  echo "$FISH_PATH" | sudo tee -a /etc/shells
+brew_install_from_tap \
+  FelixKratz/formulae \
+  borders
+
+brew_install_from_tap \
+  darknesskiller/cwal \
+  cwal
+
+########################################
+# GUI apps
+########################################
+log "Installing GUI apps"
+
+brew_cask_install ghostty
+brew_cask_install shottr
+brew_cask_install jordanbaird-ice
+brew_cask_install istat-menus
+brew_cask_install linearmouse
+brew_cask_install tabby
+brew_cask_install zed
+brew_cask_install vscodium
+brew_cask_install font-meslo-for-powerlevel10k
+
+brew_cask_install_from_tap \
+  nikitabobko/tap \
+  aerospace
+
+########################################
+# Fish shell
+########################################
+log "Ensuring fish is installed"
+
+if ! command_exists fish; then
+  log "Fish not found after install"
+  exit 1
+fi
+
+########################################
+# Set Fish as default shell
+########################################
+
+if command_exists fish; then
+  FISH_PATH="$(command -v fish)"
+
+  if [ "$SHELL" != "$FISH_PATH" ]; then
+    log "Setting Fish as default shell"
+
+    if grep -qx "$FISH_PATH" /etc/shells; then
+      chsh -s "$FISH_PATH" "$USER"
+      log "Default shell changed to Fish"
+    else
+      log "Fish not in /etc/shells, adding it"
+
+      echo "$FISH_PATH" | sudo tee -a /etc/shells >/dev/null
+      chsh -s "$FISH_PATH" "$USER"
+
+      log "Default shell changed to Fish"
+    fi
+  else
+    log "Fish already default shell"
+  fi
 fi
 
 ########################################
@@ -72,18 +181,18 @@ else
 fi
 
 ########################################
-# Tide (Fish prompt)
+# Tide
 ########################################
-if ! fish -c "fisher list" | grep -q "tide"; then
+if ! fish -c "fisher list" | grep -q "^IlanCosman/tide"; then
   log "Installing Tide theme"
   fish -c "fisher install IlanCosman/tide@v6"
 else
   log "Tide already installed"
 fi
 
-# Run tide configure only if not already configured
-if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
-  log "Running Tide configuration (interactive)"
+if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] && \
+   [ ! -f "$HOME/.config/fish/tide/config.fish" ]; then
+  log "Running Tide configuration"
   fish -c "tide configure"
 else
   log "Tide already configured"
@@ -95,16 +204,21 @@ fi
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)/.config"
 
 link_if_new() {
-  local src="$1" dest="$2"
+  local src="$1"
+  local dest="$2"
+
+  mkdir -p "$(dirname "$dest")"
 
   if [ -L "$dest" ]; then
-    log "${dest#$HOME/} symlink already exists"
+    log "${dest#$HOME/} already linked"
     return
   fi
+
   if [ -e "$dest" ]; then
-    rm "$dest"
+    rm -rf "$dest"
     log "Removed existing ${dest#$HOME/}"
   fi
+
   ln -s "$src" "$dest"
   log "${dest#$HOME/} linked"
 }
@@ -112,146 +226,99 @@ link_if_new() {
 ########################################
 # Aerospace
 ########################################
-log "Setting up aerospace config"
+log "Setting up Aerospace"
 
-mkdir -p "$HOME/.config/aerospace"
-
-link_if_new "$DOTFILES_DIR/aerospace/aerospace.toml" "$HOME/.config/aerospace/aerospace.toml"
+link_if_new \
+  "$DOTFILES_DIR/aerospace/aerospace.toml" \
+  "$HOME/.config/aerospace/aerospace.toml"
 
 ########################################
 # Fish
 ########################################
-log "Setting up fish config"
+log "Setting up Fish"
 
-link_if_new "$DOTFILES_DIR/fish/config.fish" "$HOME/.config/fish/config.fish"
-link_if_new "$DOTFILES_DIR/.fishrc" "$HOME/.fishrc"
+link_if_new \
+  "$DOTFILES_DIR/fish/config.fish" \
+  "$HOME/.config/fish/config.fish"
+
+link_if_new \
+  "$DOTFILES_DIR/.fishrc" \
+  "$HOME/.fishrc"
 
 ########################################
 # Neovim
 ########################################
-log "Setting up neovim config"
+log "Setting up Neovim"
 
-for f in init.lua; do
-  link_if_new "$DOTFILES_DIR/nvim/$f" "$HOME/.config/nvim/$f"
-done
+link_if_new \
+  "$DOTFILES_DIR/nvim/init.lua" \
+  "$HOME/.config/nvim/init.lua"
 
-for d in lua/config lua/plugins; do
-  if [ -L "$HOME/.config/nvim/$d" ]; then
-    log "nvim/$d symlink already exists"
-  else
-    [ -d "$HOME/.config/nvim/$d" ] && rm -rf "$HOME/.config/nvim/$d"
-    ln -s "$DOTFILES_DIR/nvim/$d" "$HOME/.config/nvim/$d"
-    log "nvim/$d linked"
-  fi
-done
+link_if_new \
+  "$DOTFILES_DIR/nvim/lua/config" \
+  "$HOME/.config/nvim/lua/config"
+
+link_if_new \
+  "$DOTFILES_DIR/nvim/lua/plugins" \
+  "$HOME/.config/nvim/lua/plugins"
 
 ########################################
-# opencode
+# Opencode
 ########################################
-log "Setting up opencode config"
+log "Setting up Opencode"
 
-OPENCODE_DIR="$HOME/.config/opencode"
+link_if_new \
+  "$DOTFILES_DIR/opencode/opencode.jsonc" \
+  "$HOME/.config/opencode/opencode.jsonc"
 
-mkdir -p "$OPENCODE_DIR"
+link_if_new \
+  "$DOTFILES_DIR/opencode/agents" \
+  "$HOME/.config/opencode/agents"
 
-for f in opencode.jsonc; do
-  link_if_new "$DOTFILES_DIR/opencode/$f" "$OPENCODE_DIR/$f"
-done
-
-for d in agents skills; do
-  if [ -L "$OPENCODE_DIR/$d" ]; then
-    log "opencode/$d symlink already exists"
-  else
-    [ -d "$OPENCODE_DIR/$d" ] && rm -rf "$OPENCODE_DIR/$d"
-    ln -s "$DOTFILES_DIR/opencode/$d" "$OPENCODE_DIR/$d"
-    log "opencode/$d linked"
-  fi
-done
+link_if_new \
+  "$DOTFILES_DIR/opencode/skills" \
+  "$HOME/.config/opencode/skills"
 
 ########################################
-# Zed theme setup
+# Zed theme
 ########################################
-log "Setting up Zed theme symlink"
+log "Setting up Zed theme"
 
-mkdir -p "$HOME/.config/zed/themes"
-
-if [ ! -L "$HOME/.config/zed/themes/cwal.json" ]; then
-  if [ -f "$HOME/.cache/cwal/colors-zed.json" ]; then
-    ln -s "$HOME/.cache/cwal/colors-zed.json" "$HOME/.config/zed/themes/cwal.json"
-    log "Zed theme linked"
-  else
-    log "Warning: ~/.cache/cwal/colors-zed.json not found"
-  fi
-else
-  log "Zed theme symlink already exists"
-fi
+link_if_new \
+  "$HOME/.cache/cwal/colors-zed.json" \
+  "$HOME/.config/zed/themes/cwal.json"
 
 ########################################
-# CLI tools
+# JankyBorders
 ########################################
-brew tap mhaeuser/mhaeuser
-brew_install battery-toolkit
-brew_install neovim
-brew tap FelixKratz/formulae
-brew install borders
-brew tap darknesskiller/cwal
-brew_install cwal
-brew_install yazi
-brew_install fzf
-brew_install opencode
+log "Setting up JankyBorders"
+
+link_if_new \
+  "$HOME/.cache/cwal/bordersrc" \
+  "$HOME/.config/borders/bordersrc"
 
 ########################################
-# GUI apps
+# Ghostty config
 ########################################
-brew_cask_install ghostty
-brew_cask_install shottr
-brew_cask_install jordanbaird-ice
-brew_cask_install istat-menus
-brew_cask_install linearmouse
-brew_cask_install nikitabobko/tap/aerospace
-brew_cask_install tabby
-brew_cask_install zed
-brew_cask_install vscodium
-brew_cask_install font-meslo-for-powerlevel10k
-
-########################################
-# Mac App Store
-########################################
-if ! command_exists mas; then
-  log "Installing mas CLI"
-  brew_install mas
-fi
-
-mas_install 1352778147 "Bitwarden"
-mas_install 1451685025 "WireGuard"
-
-########################################
-# JankyBorders setup
-########################################
-log "Setting up JankyBorders colors symlink"
-
-mkdir -p "$HOME/.config/borders"
-
-if [ -f "$HOME/.cache/cwal/bordersrc" ]; then
-    ln -s "$HOME/.cache/cwal/bordersrc" "$HOME/.config/borders/bordersrc"
-    log "JankyBorders theme linked"
-  else
-    log "Warning: ~/.cache/cwal/bordersrc not found"
-fi
-
-########################################
-# Done
-########################################
-log "Setup complete"
+log "Configuring Ghostty"
 
 GHOSTTY_THEME_PATH="$HOME/.cache/cwal/colors-ghostty.conf"
 
-cat <<EOF
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+else
+    GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
+fi
 
-Next step: configure Ghostty manually
+GHOSTTY_CONFIG="$GHOSTTY_CONFIG_DIR/config.ghostty"
 
-Add the following to your Ghostty config:
+mkdir -p "$GHOSTTY_CONFIG_DIR"
+touch "$GHOSTTY_CONFIG"
 
+if ! grep -qF "# Added by install.sh" "$GHOSTTY_CONFIG"; then
+  cat >>"$GHOSTTY_CONFIG" <<EOF
+
+# Added by install.sh
 theme = "$GHOSTTY_THEME_PATH"
 
 # aesthetics
@@ -263,7 +330,25 @@ font-size = 16
 font-thicken = true
 font-thicken-strength = 1
 adjust-cell-height = 1
-
 EOF
 
-log "Run: chsh -s $(which fish) to set fish as default shell"
+  log "Ghostty configured"
+else
+  log "Ghostty already configured"
+fi
+
+########################################
+# Mac App Store
+########################################
+if ! command_exists mas; then
+  log "Installing mas"
+  brew_install mas
+fi
+
+mas_install 1352778147 "Bitwarden"
+mas_install 1451685025 "WireGuard"
+
+########################################
+# Done
+########################################
+log "Done!"
