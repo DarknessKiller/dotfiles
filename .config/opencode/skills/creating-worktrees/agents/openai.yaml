@@ -1,0 +1,6 @@
+interface:
+  display_name: "Creating Worktrees"
+  short_description: "Create repo-local Git worktrees"
+  default_prompt: "Use $creating-worktrees to create a repo-local Git worktree for this task."
+policy:
+  allow_implicit_invocation: true
