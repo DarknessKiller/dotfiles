@@ -127,15 +127,6 @@ link_if_new() {
 }
 
 ########################################
-# Aerospace
-########################################
-log "Setting up Aerospace"
-
-link_if_new \
-  "$DOTFILES_DIR/aerospace/aerospace.toml" \
-  "$HOME/.config/aerospace/aerospace.toml"
-
-########################################
 # Fish
 ########################################
 log "Setting up Fish"
