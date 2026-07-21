@@ -1,6 +1,6 @@
 ---
 name: bitbucket-helper
-description: Create, read, draft, and update pull requests for self-hosted Bitbucket Server/Data Center repositories with an agent-ergonomic AXI-style helper. Use when an AI coding agent needs to draft a PR description, infer Bitbucket project/repo from local git remotes such as /scm/PROJECT/repo.git or /projects/PROJECT/repos/repo, create a PR via the Bitbucket Server REST API, update PR metadata, or avoid Bitbucket Cloud-only tools for self-hosted Bitbucket.
+description: Use when drafting, creating, getting, reading, or updating pull requests for self-hosted Bitbucket Server/Data Center repositories; when inferring Bitbucket project/repo from local git remotes such as /scm/PROJECT/repo.git or /projects/PROJECT/repos/repo; or when avoiding Bitbucket Cloud-only tools for self-hosted Bitbucket.
 ---
 
 # Bitbucket Helper
@@ -37,7 +37,7 @@ Prefer the bundled AXI-style helper CLI for repeatable repo detection, PR Markdo
 bin/bitbucket-helper
 ```
 
-The helper uses concise, structured stdout for agent consumption. Run a command with `--json` only when full raw Bitbucket API fields are needed.
+The helper uses concise, structured stdout for agent consumption. Use `get` to read an existing PR; there is no `read` subcommand. Run a command with `--json` only when full raw Bitbucket API fields are needed.
 
 ## Bitbucket Helper / Agent Integration
 
@@ -107,6 +107,18 @@ Update an existing PR title/description:
 
 ```bash
 bitbucket-helper update 123 --repo-dir . --title "PROJ-123: concise title"
+```
+
+Read an existing PR:
+
+```bash
+bitbucket-helper get 123 --repo-dir .
+```
+
+Read full raw Bitbucket fields when needed:
+
+```bash
+bitbucket-helper get 123 --repo-dir . --json
 ```
 
 Refresh an existing PR description from the local branch:
