@@ -5,14 +5,10 @@ log() {
   echo "[install] $1"
 }
 
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
 ########################################
 # Ensure paru exists
 ########################################
-if ! command_exists paru; then
+if ! command -v paru >/dev/null 2>&1; then
   log "paru is not installed. Please install it first."
   exit 1
 fi
@@ -30,6 +26,7 @@ PACKAGES=(
   yazi
   fzf
   opencode
+  pi-coding-agent
   ghostty
 )
 
@@ -40,8 +37,8 @@ paru -S --needed "${PACKAGES[@]}"
 ########################################
 log "Ensuring fish is installed"
 
-if ! command_exists fish; then
-  log "Fish not found after install (unexpected)"
+if ! command -v fish >/dev/null 2>&1; then
+  log "Fish not found after install"
   exit 1
 fi
 
@@ -49,7 +46,7 @@ fi
 # Set Fish as default shell
 ########################################
 
-if command_exists fish; then
+if command -v fish >/dev/null 2>&1; then
   FISH_PATH="$(command -v fish)"
 
   if [ "$SHELL" != "$FISH_PATH" ]; then
@@ -69,8 +66,6 @@ if command_exists fish; then
   else
     log "Fish already default shell"
   fi
-else
-  log "Fish not installed, skipping shell change"
 fi
 
 ########################################
@@ -104,7 +99,8 @@ fi
 ########################################
 # Dotfiles config symlinks
 ########################################
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)/.config"
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$REPO_DIR/.config"
 
 link_if_new() {
   local src="$1"
@@ -136,7 +132,7 @@ link_if_new \
   "$HOME/.config/fish/config.fish"
 
 link_if_new \
-  "$DOTFILES_DIR/.fishrc" \
+  "$REPO_DIR/.fishrc" \
   "$HOME/.fishrc"
 
 ########################################
@@ -165,13 +161,7 @@ link_if_new \
   "$DOTFILES_DIR/opencode/opencode.jsonc" \
   "$HOME/.config/opencode/opencode.jsonc"
 
-link_if_new \
-  "$DOTFILES_DIR/opencode/agents" \
-  "$HOME/.config/opencode/agents"
-
-link_if_new \
-  "$DOTFILES_DIR/opencode/skills" \
-  "$HOME/.config/opencode/skills"
+"$REPO_DIR/scripts/install-agent-skills.sh"
 
 ########################################
 # Zed theme
