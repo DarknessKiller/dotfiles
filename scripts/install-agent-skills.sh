@@ -76,16 +76,3 @@ else
   log "npx not found; skipped Agent Skills installs"
 fi
 
-for dest in "$HOME/.codex/skills" "$HOME/.config/opencode/skills"; do
-  for skill in grill-me grilling writing-great-skills; do
-    target="$dest/$skill"
-    if [ -L "$target" ]; then
-      case "$(readlink "$target")" in
-        */skills/skills/productivity/$skill)
-          rm "$target"
-          log "Removed stale local $skill link from $dest"
-          ;;
-      esac
-    fi
-  done
-done
