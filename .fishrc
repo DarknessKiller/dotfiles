@@ -26,6 +26,10 @@ abbr -a gco 'git checkout'
 abbr -a gcb 'git checkout -b'
 abbr -a gl 'git log --oneline --graph --decorate --all'
 
+# agentic aliases
+alias ocweb="tmux new-session -d -s opencode_web 'cd ~; BROWSER=true opencode web --hostname 0.0.0.0'"
+alias piweb="tmux new-session -d -s pi_web 'cd ~; pi-web --hostname 0.0.0.0 --port 4097 --no-open'"
+
 source ~/.cache/cwal/colors.fish
 # Only needed if you want override shell colors
 # sh ~/.cache/cwal/terminal.sh
