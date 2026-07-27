@@ -221,6 +221,21 @@ link_if_new() {
   log "${dest#$HOME/} linked"
 }
 
+copy_if_missing() {
+  local src="$1"
+  local dest="$2"
+
+  mkdir -p "$(dirname "$dest")"
+
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    log "${dest#$HOME/} exists, leaving local copy"
+    return
+  fi
+
+  cp "$src" "$dest"
+  log "${dest#$HOME/} copied"
+}
+
 ########################################
 # Aerospace
 ########################################
@@ -265,7 +280,7 @@ link_if_new \
 ########################################
 log "Setting up Opencode"
 
-link_if_new \
+copy_if_missing \
   "$DOTFILES_DIR/opencode/opencode.jsonc" \
   "$HOME/.config/opencode/opencode.jsonc"
 

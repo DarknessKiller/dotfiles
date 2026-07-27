@@ -5,10 +5,17 @@ log() {
   echo "[agent-skills] $1"
 }
 
-SKILLS_GIT_REPO="${ATLAS_SKILLS_GIT_REPO:-git@github.com:DarknessKiller/skills.git}"
-SKILLS_PI_SOURCE="${ATLAS_SKILLS_PI_SOURCE:-git:git@github.com:DarknessKiller/skills}"
-SKILLS_DIR="${ATLAS_SKILLS_DIR:-$HOME/skills}"
+ATLAS_SKILLS_SOURCE="${ATLAS_SKILLS_SOURCE:-https://github.com/darknesskiller/skills}"
 OLD_PI_AGENT_LINK="$HOME/.pi/agent/AGENTS.md"
+
+LOCAL_MCP_INSTALLER="${ATLAS_AGENT_MCP_INSTALLER:-$HOME/.config/agent-mcp/install.sh}"
+
+if [ -x "$LOCAL_MCP_INSTALLER" ]; then
+  "$LOCAL_MCP_INSTALLER"
+  log "Local MCP installer ran"
+else
+  log "No local MCP installer at $LOCAL_MCP_INSTALLER; skipped MCP secrets"
+fi
 
 if [ -L "$OLD_PI_AGENT_LINK" ]; then
   case "$(readlink "$OLD_PI_AGENT_LINK")" in
@@ -25,8 +32,7 @@ if command -v pi >/dev/null 2>&1; then
     npm:@dietrichgebert/ponytail \
     npm:pi-context-cap \
     npm:pi-web-access \
-    npm:@tintinweb/pi-subagents \
-    "$SKILLS_PI_SOURCE"; do
+    npm:@tintinweb/pi-subagents; do
     if pi install "$pkg"; then
       log "Pi package installed: $pkg"
     else
@@ -48,9 +54,17 @@ else
 fi
 
 if command -v npx >/dev/null 2>&1; then
+  if npx -y skills@latest add "$ATLAS_SKILLS_SOURCE" \
+    -g \
+    -y \
+    --full-depth; then
+    log "Atlas skills installed: $ATLAS_SKILLS_SOURCE"
+  else
+    log "Atlas skills skipped"
+  fi
+
   if npx -y skills@latest add mattpocock/skills \
     -g \
-    -a pi opencode codex claude-code \
     -s grill-me grilling writing-great-skills \
     -y \
     --full-depth; then
@@ -59,7 +73,7 @@ if command -v npx >/dev/null 2>&1; then
     log "Matt Pocock skills skipped"
   fi
 else
-  log "npx not found; skipped Matt Pocock skills"
+  log "npx not found; skipped Agent Skills installs"
 fi
 
 for dest in "$HOME/.codex/skills" "$HOME/.config/opencode/skills"; do
@@ -75,30 +89,3 @@ for dest in "$HOME/.codex/skills" "$HOME/.config/opencode/skills"; do
     fi
   done
 done
-
-if ! command -v git >/dev/null 2>&1; then
-  log "Git not found; skipped Claude/Codex/OpenCode skill links"
-  exit 0
-fi
-
-if [ -d "$SKILLS_DIR/.git" ]; then
-  if git -C "$SKILLS_DIR" pull --ff-only; then
-    log "Updated $SKILLS_DIR"
-  else
-    log "Could not update $SKILLS_DIR; using existing checkout"
-  fi
-else
-  mkdir -p "$(dirname "$SKILLS_DIR")"
-  if git clone "$SKILLS_GIT_REPO" "$SKILLS_DIR"; then
-    log "Cloned $SKILLS_GIT_REPO to $SKILLS_DIR"
-  else
-    log "Could not clone $SKILLS_GIT_REPO; skipped skill links"
-    exit 0
-  fi
-fi
-
-if [ -x "$SKILLS_DIR/scripts/link-skills.sh" ]; then
-  "$SKILLS_DIR/scripts/link-skills.sh"
-else
-  log "Missing $SKILLS_DIR/scripts/link-skills.sh"
-fi
