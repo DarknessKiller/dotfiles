@@ -122,21 +122,6 @@ link_if_new() {
   log "${dest#$HOME/} linked"
 }
 
-copy_if_missing() {
-  local src="$1"
-  local dest="$2"
-
-  mkdir -p "$(dirname "$dest")"
-
-  if [ -e "$dest" ] || [ -L "$dest" ]; then
-    log "${dest#$HOME/} exists, leaving local copy"
-    return
-  fi
-
-  cp "$src" "$dest"
-  log "${dest#$HOME/} copied"
-}
-
 ########################################
 # Fish
 ########################################
@@ -166,15 +151,6 @@ link_if_new \
 link_if_new \
   "$DOTFILES_DIR/nvim/lua/plugins" \
   "$HOME/.config/nvim/lua/plugins"
-
-########################################
-# Opencode
-########################################
-log "Setting up Opencode"
-
-copy_if_missing \
-  "$DOTFILES_DIR/opencode/opencode.jsonc" \
-  "$HOME/.config/opencode/opencode.jsonc"
 
 "$REPO_DIR/scripts/install-agent-skills.sh"
 
