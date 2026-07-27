@@ -5,10 +5,6 @@ log() {
   echo "[install] $1"
 }
 
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
 brew_install_from_tap() {
   local tap="$1"
   local formula="$2"
@@ -84,7 +80,7 @@ mas_install() {
 ########################################
 # Homebrew
 ########################################
-if ! command_exists brew; then
+if ! command -v brew >/dev/null 2>&1; then
   log "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
@@ -101,6 +97,7 @@ brew_install neovim
 brew_install yazi
 brew_install fzf
 brew_install opencode
+brew_install pi-coding-agent
 brew_install borders
 
 brew_install_from_tap \
@@ -139,7 +136,7 @@ brew_cask_install_from_tap \
 ########################################
 log "Ensuring fish is installed"
 
-if ! command_exists fish; then
+if ! command -v fish >/dev/null 2>&1; then
   log "Fish not found after install"
   exit 1
 fi
@@ -148,7 +145,7 @@ fi
 # Set Fish as default shell
 ########################################
 
-if command_exists fish; then
+if command -v fish >/dev/null 2>&1; then
   FISH_PATH="$(command -v fish)"
 
   if [ "$SHELL" != "$FISH_PATH" ]; then
@@ -201,7 +198,8 @@ fi
 ########################################
 # Dotfiles config symlinks
 ########################################
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)/.config"
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$REPO_DIR/.config"
 
 link_if_new() {
   local src="$1"
@@ -242,7 +240,7 @@ link_if_new \
   "$HOME/.config/fish/config.fish"
 
 link_if_new \
-  "$DOTFILES_DIR/.fishrc" \
+  "$REPO_DIR/.fishrc" \
   "$HOME/.fishrc"
 
 ########################################
@@ -271,13 +269,7 @@ link_if_new \
   "$DOTFILES_DIR/opencode/opencode.jsonc" \
   "$HOME/.config/opencode/opencode.jsonc"
 
-link_if_new \
-  "$DOTFILES_DIR/opencode/agents" \
-  "$HOME/.config/opencode/agents"
-
-link_if_new \
-  "$DOTFILES_DIR/opencode/skills" \
-  "$HOME/.config/opencode/skills"
+"$REPO_DIR/scripts/install-agent-skills.sh"
 
 ########################################
 # Zed theme
@@ -340,7 +332,7 @@ fi
 ########################################
 # Mac App Store
 ########################################
-if ! command_exists mas; then
+if ! command -v mas >/dev/null 2>&1; then
   log "Installing mas"
   brew_install mas
 fi
