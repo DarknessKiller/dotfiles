@@ -32,7 +32,8 @@ if command -v pi >/dev/null 2>&1; then
     npm:@dietrichgebert/ponytail \
     npm:pi-context-cap \
     npm:pi-web-access \
-    npm:@tintinweb/pi-subagents; do
+    npm:@tintinweb/pi-subagents \
+    npm:@quintinshaw/pi-dynamic-workflows; do
     if pi install "$pkg"; then
       log "Pi package installed: $pkg"
     else
