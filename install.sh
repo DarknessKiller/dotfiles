@@ -240,6 +240,10 @@ link_if_new \
   "$HOME/.config/fish/config.fish"
 
 link_if_new \
+  "$DOTFILES_DIR/fish/functions.fish" \
+  "$HOME/.config/fish/functions.fish"
+
+link_if_new \
   "$REPO_DIR/.fishrc" \
   "$HOME/.fishrc"
 
