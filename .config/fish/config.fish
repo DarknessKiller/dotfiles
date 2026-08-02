@@ -1,5 +1,9 @@
-source /usr/share/cachyos-fish-config/cachyos-config.fish
 set fish_greeting
+
+# CachyOS
+if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
+    source /usr/share/cachyos-fish-config/cachyos-config.fish
+end
 
 # User functions
 if test -f ~/.config/fish/functions.fish
