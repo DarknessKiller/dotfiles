@@ -33,7 +33,8 @@ if command -v pi >/dev/null 2>&1; then
     npm:pi-context-cap \
     npm:pi-web-access \
     npm:@tintinweb/pi-subagents \
-    npm:@quintinshaw/pi-dynamic-workflows; do
+    npm:@quintinshaw/pi-dynamic-workflows \
+    git:github.com/DarknessKiller/pi-cliproxyapi-provider; do
     if pi install "$pkg"; then
       log "Pi package installed: $pkg"
     else
