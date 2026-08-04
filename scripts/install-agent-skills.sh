@@ -74,6 +74,15 @@ if command -v npx >/dev/null 2>&1; then
   else
     log "Matt Pocock skills skipped"
   fi
+
+    if npx -y skills@latest add https://github.com/juliusbrussee/caveman \
+    -g \
+    -y \
+    --full-depth; then
+    log "Cavecrew skills installed"
+  else
+    log "Cavecrew skills skipped"
+  fi
 else
   log "npx not found; skipped Agent Skills installs"
 fi
