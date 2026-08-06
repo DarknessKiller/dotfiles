@@ -67,10 +67,10 @@ if command -v npx >/dev/null 2>&1; then
 
   if npx -y skills@latest add mattpocock/skills \
     -g \
-    -s grill-me grilling writing-great-skills \
+    -s grill-me grilling grill-with-docs writing-for-agents  \
     -y \
     --full-depth; then
-    log "Matt Pocock skills installed: grill-me, grilling, writing-great-skills"
+    log "Matt Pocock skills installed"
   else
     log "Matt Pocock skills skipped"
   fi
