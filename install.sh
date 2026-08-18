@@ -112,6 +112,11 @@ brew_install_from_tap \
   darknesskiller/cwal \
   cwal
 
+brew_install_from_tap \
+  csandmann/rift \
+  rift
+
+
 ########################################
 # GUI apps
 ########################################
@@ -323,6 +328,15 @@ EOF
 else
   log "Ghostty already configured"
 fi
+
+########################################
+# JankyBorders
+########################################
+log "Setting up Rift"
+
+link_if_new \
+  "$DOTFILES_DIR/rift/config.toml" \
+  "$HOME/.config/rift/config.toml"
 
 ########################################
 # Mac App Store

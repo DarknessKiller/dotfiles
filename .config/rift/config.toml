@@ -1,0 +1,118 @@
+# Rift configuration approximating OmniWM's niri layout and keybindings.
+
+[settings]
+animate = true
+animation_duration = 0.3
+animation_fps = 100.0
+focus_follows_mouse = false
+mouse_follows_focus = true
+mouse_hides_on_focus = false
+hot_reload = true
+
+[settings.layout]
+mode = "scrolling"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.scrolling]
+column_width_ratio = 0.5
+min_column_width_ratio = 0.3
+max_column_width_ratio = 0.9
+alignment = "center"
+focus_navigation_style = "niri"
+
+[settings.layout.scrolling.gestures]
+enabled = true
+invert_horizontal = false
+fingers = 3
+propagate_to_workspace_swipe = true
+
+[settings.layout.gaps.outer]
+top = 12
+left = 12
+bottom = 12
+right = 12
+
+[settings.layout.gaps.inner]
+horizontal = 14
+vertical = 14
+
+[settings.gestures]
+enabled = true
+
+[settings.ui.menu_bar]
+enabled = true
+
+[settings.ui.mission_control]
+enabled = false
+fade_enabled = false
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 10
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = false
+reapply_app_rules_on_title_change = false
+workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9","10"]
+workspace_rules = []
+
+# App Rules
+app_rules = [
+  { app_id = "com.bitwarden.desktop", floating = true },
+  { app_id = "com.microsoft.Outlook", title_substring = "Reminder", floating = true },
+]
+
+[keys]
+"Alt + Z" = "toggle_space_activated"
+
+# Workspaces
+"Alt + 1" = { switch_to_workspace = 0 }
+"Alt + 2" = { switch_to_workspace = 1 }
+"Alt + 3" = { switch_to_workspace = 2 }
+"Alt + 4" = { switch_to_workspace = 3 }
+"Alt + 5" = { switch_to_workspace = 4 }
+"Alt + 6" = { switch_to_workspace = 5 }
+"Alt + 7" = { switch_to_workspace = 6 }
+"Alt + 8" = { switch_to_workspace = 7 }
+"Alt + 9" = { switch_to_workspace = 8 }
+"Alt + 0" = { switch_to_workspace = 9 }
+
+"Alt + Shift + 1" = { move_window_to_workspace = 0 }
+"Alt + Shift + 2" = { move_window_to_workspace = 1 }
+"Alt + Shift + 3" = { move_window_to_workspace = 2 }
+"Alt + Shift + 4" = { move_window_to_workspace = 3 }
+"Alt + Shift + 5" = { move_window_to_workspace = 4 }
+"Alt + Shift + 6" = { move_window_to_workspace = 5 }
+"Alt + Shift + 7" = { move_window_to_workspace = 6 }
+"Alt + Shift + 8" = { move_window_to_workspace = 7 }
+"Alt + Shift + 9" = { move_window_to_workspace = 8 }
+"Alt + Shift + 0" = { move_window_to_workspace = 9 }
+
+"Ctrl + Alt + Tab" = "switch_to_last_workspace"
+"Alt + Tab" = "prev_window"
+
+# Focus and move windows.
+"Alt + Left" = { move_focus = "left" }
+"Alt + Down" = { move_focus = "down" }
+"Alt + Up" = { move_focus = "up" }
+"Alt + Right" = { move_focus = "right" }
+
+"Alt + Shift + Left" = { move_node = "left" }
+"Alt + Shift + Down" = { move_node = "down" }
+"Alt + Shift + Up" = { move_node = "up" }
+"Alt + Shift + Right" = { move_node = "right" }
+
+# Fullscreen and floating windows.
+"Alt + Shift + Enter" = "toggle_fullscreen"
+"Alt + Return" = "toggle_fullscreen_within_gaps"
+"Alt + Shift + T" = "toggle_window_floating"
+
+# Dynamic resizing: Rift chooses the applicable orientation.
+"Alt + T" = "toggle_stack"
+"Alt + Minus" = { resize_window_shrink = "smart" }
+"Alt + Equal" = { resize_window_grow = "smart" }
+
+# Move focused windows to adjacent workspaces.
+"Ctrl + Alt + Shift + Left" = { move_window_to_workspace = "prev" }
+"Ctrl + Alt + Shift + Right" = { move_window_to_workspace = "next" }
