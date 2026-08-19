@@ -113,7 +113,7 @@ brew_install_from_tap \
   cwal
 
 brew_install_from_tap \
-  csandmann/tap \
+  acsandmann/tap \
   rift
 
 
