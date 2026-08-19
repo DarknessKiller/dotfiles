@@ -113,7 +113,7 @@ brew_install_from_tap \
   cwal
 
 brew_install_from_tap \
-  csandmann/rift \
+  csandmann/tap \
   rift
 
 
@@ -330,7 +330,7 @@ else
 fi
 
 ########################################
-# JankyBorders
+# Rift
 ########################################
 log "Setting up Rift"
 
