@@ -41,6 +41,8 @@ enabled = true
 
 [settings.ui.menu_bar]
 enabled = true
+mode = "active"
+display_style = "label"
 
 [settings.ui.mission_control]
 enabled = false
@@ -60,7 +62,7 @@ workspace_rules = []
 # App Rules
 app_rules = [
   { app_id = "com.bitwarden.desktop", floating = true },
-  { app_id = "com.microsoft.Outlook", title_substring = "Reminder", floating = true },
+  { app_id = "com.microsoft.Outlook", title_substring = "Reminder", manage = false },
 ]
 
 [keys]
