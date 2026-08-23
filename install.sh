@@ -1,10 +1,39 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+### Helper functions
 log() {
 	echo "[install] $1"
 }
 
+
+########################################
+# Dotfiles config symlinks
+########################################
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$REPO_DIR/.config"
+
+link_if_new() {
+	local src="$1"
+	local dest="$2"
+
+	mkdir -p "$(dirname "$dest")"
+
+	if [ -L "$dest" ]; then
+		log "${dest#$HOME/} already linked"
+		return
+	fi
+
+	if [ -e "$dest" ]; then
+		rm -rf "$dest"
+		log "Removed existing ${dest#$HOME/}"
+	fi
+
+	ln -s "$src" "$dest"
+	log "${dest#$HOME/} linked"
+}
+
+## Installer starts here
 ########################################
 # Ensure paru exists
 ########################################
@@ -95,32 +124,6 @@ if [ ! -f "$HOME/.config/fish/conf.d/tide.fish" ] &&
 else
 	log "Tide already configured"
 fi
-
-########################################
-# Dotfiles config symlinks
-########################################
-REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-DOTFILES_DIR="$REPO_DIR/.config"
-
-link_if_new() {
-	local src="$1"
-	local dest="$2"
-
-	mkdir -p "$(dirname "$dest")"
-
-	if [ -L "$dest" ]; then
-		log "${dest#$HOME/} already linked"
-		return
-	fi
-
-	if [ -e "$dest" ]; then
-		rm -rf "$dest"
-		log "Removed existing ${dest#$HOME/}"
-	fi
-
-	ln -s "$src" "$dest"
-	log "${dest#$HOME/} linked"
-}
 
 ########################################
 # Fish
