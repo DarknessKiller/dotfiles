@@ -239,19 +239,23 @@ link_if_new \
 ########################################
 # Fish
 ########################################
-log "Setting up Fish"
+if command -v fish >/dev/null 2>&1; then
+	log "Setting up Fish"
 
-link_if_new \
-	"$DOTFILES_DIR/fish/config.fish" \
-	"$HOME/.config/fish/config.fish"
+	link_if_new \
+		"$DOTFILES_DIR/fish/config.fish" \
+		"$HOME/.config/fish/config.fish"
 
-link_if_new \
-	"$DOTFILES_DIR/fish/functions.fish" \
-	"$HOME/.config/fish/functions.fish"
+	link_if_new \
+		"$DOTFILES_DIR/fish/functions.fish" \
+		"$HOME/.config/fish/functions.fish"
 
-link_if_new \
-	"$REPO_DIR/.fishrc" \
-	"$HOME/.fishrc"
+	link_if_new \
+		"$REPO_DIR/.fishrc" \
+		"$HOME/.fishrc"
+else
+	log "Fish not installed, skipping config links"
+fi
 
 ########################################
 # cwal
