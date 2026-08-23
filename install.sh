@@ -185,14 +185,14 @@ fi
 ########################################
 # OmniWM
 ########################################
-if command -v omniwm >/dev/null 2>&1; then
+if command -v omniwmctl >/dev/null 2>&1; then
 	log "Setting up OmniWM"
 
 	link_if_new \
-		"$DOTFILES_DIR/omniwm/config.toml" \
-		"$HOME/.config/omniwm/config.toml"
+		"$DOTFILES_DIR/omniwm/settings.toml" \
+		"$HOME/.config/omniwm/settings.toml"
 else
-	log "OmniWM not installed, skipping config links"
+	log "OmniWM not installed, skipping settings links"
 fi
 
 ########################################
