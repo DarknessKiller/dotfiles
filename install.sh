@@ -140,9 +140,60 @@ brew_install_from_tap \
 	darknesskiller/cwal \
 	cwal
 
+########################################
+# Window manager
+########################################
+
+# brew_cask_install_from_tap \
+# 	nikitabobko/tap \
+# 	aerospace
+
+# brew_install_from_tap \
+# 	acsandmann/tap \
+# 	rift
+
 brew_install_from_tap \
-	acsandmann/tap \
-	rift
+	BarutSRB/tap \
+	omniwm
+
+########################################
+# Aerospace
+########################################
+if command -v aerospace >/dev/null 2>&1; then
+	log "Setting up Aerospace"
+
+	link_if_new \
+		"$DOTFILES_DIR/aerospace/aerospace.toml" \
+		"$HOME/.config/aerospace/aerospace.toml"
+else
+	log "Aerospace not installed, skipping config links"
+fi
+
+########################################
+# Rift
+########################################
+if command -v rift >/dev/null 2>&1; then
+	log "Setting up Rift"
+
+	link_if_new \
+		"$DOTFILES_DIR/rift/config.toml" \
+		"$HOME/.config/rift/config.toml"
+else
+	log "Rift not installed, skipping config links"
+fi
+
+########################################
+# OmniWM
+########################################
+if command -v omniwm >/dev/null 2>&1; then
+	log "Setting up OmniWM"
+
+	link_if_new \
+		"$DOTFILES_DIR/omniwm/config.toml" \
+		"$HOME/.config/omniwm/config.toml"
+else
+	log "OmniWM not installed, skipping config links"
+fi
 
 ########################################
 # GUI apps
@@ -159,9 +210,6 @@ brew_cask_install zed
 brew_cask_install vscodium
 brew_cask_install font-meslo-for-powerlevel10k
 
-brew_cask_install_from_tap \
-	nikitabobko/tap \
-	aerospace
 
 ########################################
 # Fish shell
@@ -227,14 +275,6 @@ else
 	log "Tide already configured"
 fi
 
-########################################
-# Aerospace
-########################################
-log "Setting up Aerospace"
-
-link_if_new \
-	"$DOTFILES_DIR/aerospace/aerospace.toml" \
-	"$HOME/.config/aerospace/aerospace.toml"
 
 ########################################
 # Fish
@@ -367,15 +407,6 @@ EOF
 else
 	log "Ghostty not installed, skipping config links"
 fi
-
-########################################
-# Rift
-########################################
-log "Setting up Rift"
-
-link_if_new \
-	"$DOTFILES_DIR/rift/config.toml" \
-	"$HOME/.config/rift/config.toml"
 
 ########################################
 # Mac App Store
