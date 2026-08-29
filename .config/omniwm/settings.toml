@@ -4,6 +4,7 @@ monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
 monitorRoutingOverrides = []
+schemaVersion = 1
 
 [appearance]
 mode = "dark"
@@ -137,6 +138,10 @@ widthPercent = 50.0
 [routing]
 mode = "macOS"
 
+[scratchpads]
+
+[scratchpads.labels]
+
 [statusBar]
 showAppNames = false
 showWorkspaceName = true
@@ -149,6 +154,7 @@ enabled = false
 excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = true
+hideInNativeFullscreen = false
 notchActiveZoneWidth = 180.0
 notchMode = "moveBelowMenuBar"
 position = "overlappingMenuBar"
@@ -252,6 +258,86 @@ bundleId = "com.microsoft.Outlook"
 id = "D300F6F4-105C-4AB2-9140-C892017D8B72"
 layout = "float"
 titleSubstring = "Reminder"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.10"
 
 [[hotkeys]]
 binding = "Option+1"
@@ -820,14 +906,6 @@ id = "rescueOffscreenWindows"
 [[hotkeys]]
 binding = "Option+Shift+T"
 id = "toggleFocusedWindowFloating"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "assignFocusedWindowToScratchpad"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleScratchpadWindow"
 
 [[hotkeys]]
 binding = "Control+Option+M"
