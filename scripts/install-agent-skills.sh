@@ -26,37 +26,18 @@ if [ -L "$OLD_PI_AGENT_LINK" ]; then
   esac
 fi
 
-if command -v pi >/dev/null 2>&1; then
-  for pkg in \
-    npm:pi-mcp-adapter \
-    npm:@dietrichgebert/ponytail \
-    npm:pi-context-cap \
-    npm:pi-web-access \
-    npm:@tintinweb/pi-subagents \
-    npm:@quintinshaw/pi-dynamic-workflows \
-    git:github.com/DarknessKiller/pi-cliproxyapi-provider; do
-    if pi install "$pkg"; then
-      log "Pi package installed: $pkg"
-    else
-      log "Pi package skipped: $pkg"
-    fi
-  done
-else
-  log "Pi not found; skipped Pi packages"
-fi
-
-if command -v opencode >/dev/null 2>&1; then
-  if opencode plugin -g @dietrichgebert/ponytail; then
-    log "OpenCode plugin installed: @dietrichgebert/ponytail"
-  else
-    log "OpenCode ponytail plugin skipped"
-  fi
-else
-  log "OpenCode not found; skipped OpenCode plugins"
-fi
-
 if command -v npx >/dev/null 2>&1; then
-  if npx -y skills@latest add "$ATLAS_SKILLS_SOURCE" \
+  if npx -y skills@latest add https://github.com/juliusbrussee/caveman \
+    -s caveman \
+    -g \
+    -y \
+    --full-depth; then
+    log "Caveman skill installed"
+  else
+    log "Caveman skill skipped"
+  fi
+
+    if npx -y skills@latest add "$ATLAS_SKILLS_SOURCE" \
     -g \
     -y \
     --full-depth; then
@@ -67,7 +48,7 @@ if command -v npx >/dev/null 2>&1; then
 
   if npx -y skills@latest add mattpocock/skills \
     -g \
-    -s grill-me grilling grill-with-docs writing-for-agents  \
+    -s grill-with-docs grill-me grilling handoff teach wait-what writing-for-agents \
     -y \
     --full-depth; then
     log "Matt Pocock skills installed"
@@ -75,14 +56,16 @@ if command -v npx >/dev/null 2>&1; then
     log "Matt Pocock skills skipped"
   fi
 
-    if npx -y skills@latest add https://github.com/juliusbrussee/caveman \
+  if npx -y skills@latest add https://github.com/cursor/plugins/tree/main/pstack  \
     -g \
+    -s unslop technical-writing \
     -y \
     --full-depth; then
-    log "Cavecrew skills installed"
+    log "Pstack skills installed"
   else
-    log "Cavecrew skills skipped"
+    log "Pstack skills skipped"
   fi
+
 else
   log "npx not found; skipped Agent Skills installs"
 fi
