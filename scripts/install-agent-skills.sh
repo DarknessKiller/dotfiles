@@ -27,18 +27,13 @@ if [ -L "$OLD_PI_AGENT_LINK" ]; then
 fi
 
 if command -v npx >/dev/null 2>&1; then
-  # Caveman skill goes only to OpenCode global config, not via `skills` CLI
-  # (CLI always installs canonical files to ~/.agents/skills).
-  CAVEMAN_SRC="/tmp/opencode/caveman-repo"
-  CAVEMAN_DEST="$HOME/.config/opencode/skills/caveman"
-  if git clone -q --depth 1 https://github.com/juliusbrussee/caveman "$CAVEMAN_SRC"; then
-    mkdir -p "$HOME/.config/opencode/skills"
-    rm -rf "$CAVEMAN_DEST"
-    cp -r "$CAVEMAN_SRC/skills/caveman" "$CAVEMAN_DEST"
-    rm -rf "$CAVEMAN_SRC" ~/.agents/skills/caveman
-    log "Caveman skill installed to OpenCode config"
+  if npx -y skills@latest add https://github.com/juliusbrussee/caveman \
+    -g \
+    -y \
+    --full-depth; then
+    log "Caveman skills installed"
   else
-    log "Caveman skill skipped (clone failed)"
+    log "Caveman skills skipped"
   fi
 
     if npx -y skills@latest add "$ATLAS_SKILLS_SOURCE" \
