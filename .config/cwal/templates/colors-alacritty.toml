@@ -1,23 +1,21 @@
-# Catppuccin Macchiato + dynamic accents
-
 [colors.primary]
-background = "#24273a"
+background = "{background}"
 foreground = "{foreground}"
 
 [colors.cursor]
-text = "#24273a"
-cursor = "{color4}"
+text = "{background}"
+cursor = "{foreground}"
 
 [colors.vi_mode_cursor]
-text = "#24273a"
-cursor = "{color5}"
+text = "{background}"
+cursor = "{foreground}"
 
 [colors.search.matches]
-foreground = "#24273a"
-background = "{color4}"
+foreground = "{color0}"
+background = "{color15}"
 
 [colors.search.focused_match]
-foreground = "#24273a"
+foreground = "{background}"
 background = "{color1}"
 
 [colors.line_indicator]
@@ -26,38 +24,39 @@ background = "None"
 
 [colors.footer_bar]
 foreground = "{color8}"
-background = "#363a4f"
+background = "{color7}"
 
 [colors.selection]
-text = "#24273a"
-background = "{color5}"
+text = "{background}"
+background = "{color1}"
 
 [colors.normal]
-black   = "#181926"
-red     = "{color1}"
-green   = "{color2}"
-yellow  = "{color3}"
-blue    = "{color4}"
+black = "{color0}"
+red = "{color1}"
+green = "{color2}"
+yellow = "{color3}"
+blue = "{color4}"
 magenta = "{color5}"
-cyan    = "{color6}"
-white   = "{foreground}"
+cyan = "{color6}"
+white = "{color7}"
 
 [colors.bright]
-black   = "#363a4f"
-red     = "{color9}"
-green   = "{color10}"
-yellow  = "{color11}"
-blue    = "{color12}"
+black = "{color8}"
+red = "{color9}"
+green = "{color10}"
+yellow = "{color11}"
+blue = "{color12}"
 magenta = "{color13}"
-cyan    = "{color14}"
-white   = "{color15}"
+cyan = "{color14}"
+white = "{color15}"
 
 [colors.dim]
-black   = "#181926"
-red     = "{color9}"
-green   = "{color10}"
-yellow  = "{color11}"
-blue    = "{color12}"
-magenta = "{color13}"
-cyan    = "{color14}"
-white   = "{color8}"
+black = "{color15}"
+red = "{color9}"
+green = "{color13}"
+yellow = "{color11}"
+blue = "{color12}"
+magenta = "{color10}"
+cyan = "{color14}"
+white = "{color8}"
+
