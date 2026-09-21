@@ -1,26 +1,21 @@
- # Set terminal colors script - Generated for cwal
-
-# Colors 0-15
-printf "\033]4;0;{color0}\033\\"
-printf "\033]4;1;{color1}\033\\"
-printf "\033]4;2;{color2}\033\\"
-printf "\033]4;3;{color3}\033\\"
-printf "\033]4;4;{color4}\033\\"
-printf "\033]4;5;{color5}\033\\"
-printf "\033]4;6;{color6}\033\\"
-printf "\033]4;7;{color7}\033\\"
-printf "\033]4;8;{color8}\033\\"
-printf "\033]4;9;{color9}\033\\"
-printf "\033]4;10;{color10}\033\\"
-printf "\033]4;11;{color11}\033\\"
-printf "\033]4;12;{color12}\033\\"
-printf "\033]4;13;{color13}\033\\"
-printf "\033]4;14;{color14}\033\\"
-printf "\033]4;15;{color15}\033\\"
-
-# Special colors
-printf "\033]10;{foreground}\033\\"   # foreground
-printf "\033]11;{background}\033\\"   # background
-printf "\033]12;{cursor}\033\\"       # cursor
-printf "\033]708;{border}\033\\"      # border
-
+# Catppuccin Mocha ANSI palette; only the cursor is wallpaper-derived.
+printf "\033]4;0;#45475a\033\\"
+printf "\033]4;1;#f38ba8\033\\"
+printf "\033]4;2;#a6e3a1\033\\"
+printf "\033]4;3;#f9e2af\033\\"
+printf "\033]4;4;#89b4fa\033\\"
+printf "\033]4;5;#f5c2e7\033\\"
+printf "\033]4;6;#94e2d5\033\\"
+printf "\033]4;7;#a6adc8\033\\"
+printf "\033]4;8;#585b70\033\\"
+printf "\033]4;9;#f37799\033\\"
+printf "\033]4;10;#89d88b\033\\"
+printf "\033]4;11;#ebd391\033\\"
+printf "\033]4;12;#74a8fc\033\\"
+printf "\033]4;13;#f2aede\033\\"
+printf "\033]4;14;#6bd7ca\033\\"
+printf "\033]4;15;#bac2de\033\\"
+printf "\033]10;#cdd6f4\033\\"
+printf "\033]11;#1e1e2e\033\\"
+printf "\033]12;{color1}\033\\"
+printf "\033]708;#313244\033\\"
