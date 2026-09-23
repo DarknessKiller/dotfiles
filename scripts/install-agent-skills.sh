@@ -65,6 +65,14 @@ if command -v npx >/dev/null 2>&1; then
     log "Pstack skills skipped"
   fi
 
+  if npx -y skills@latest add ayghri/i-have-adhd \
+    -g \
+    -y; then
+    log "i-have-adhd skill installed"
+  else
+    log "i-have-adhd skill skipped"
+  fi
+
 else
   log "npx not found; skipped Agent Skills installs"
 fi
