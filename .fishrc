@@ -30,6 +30,9 @@ abbr -a gl 'git log --oneline --graph --decorate --all'
 alias ocweb="tmux new-session -d -s ocweb 'cd ~; opencode serve --hostname 0.0.0.0'"
 alias aoeweb="tmux new-session -d -s aoeweb 'cd ~; aoe serve --host 0.0.0.0 --port 4098'"
 
-source ~/.cache/cwal/colors.fish
-# Only needed if you want override shell colors
-# sh ~/.cache/cwal/terminal.sh
+if test -f ~/.cache/cwal/colors.fish
+    source ~/.cache/cwal/colors.fish
+
+    # Only needed if you want override shell colors
+    # sh ~/.cache/cwal/terminal.sh
+end
