@@ -1,4 +1,5 @@
 set fish_greeting
+set -gx GPG_TTY (tty)
 
 # User functions
 if test -f ~/.config/fish/functions.fish
