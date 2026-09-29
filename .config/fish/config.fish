@@ -1,4 +1,5 @@
 set fish_greeting
+set -gx GPG_TTY (tty)
 
 # CachyOS
 if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
