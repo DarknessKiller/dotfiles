@@ -5,7 +5,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 
-if vim.env.SSH_CONNECTION then
+if vim.env.SSH_CONNECTION or vim.env.ORCA_TERMINAL_HANDLE then
   vim.g.clipboard = {
     name = 'OSC 52',
     copy = {
