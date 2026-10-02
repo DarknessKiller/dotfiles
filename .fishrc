@@ -1,8 +1,7 @@
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR="nvim"
-export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+export EDITOR=nvim
 
 # my abbrs
 abbr -a pwdcp 'pwd | pbcopy'
@@ -22,8 +21,10 @@ abbr -a gco git checkout
 abbr -a gcb git checkout -b
 abbr -a gl git log --oneline --graph --decorate --all
 
-# agentic aliases
-alias ocweb="tmux new-session -d -s ocweb 'cd ~; opencode serve --hostname 0.0.0.0'"
+if test -f ~/.bitwarden-ssh-agent.sock
+  export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+end
+
 alias aoeweb="tmux new-session -d -s aoeweb 'cd ~; aoe serve --host 0.0.0.0 --port 4098'"
 
 if test -f ~/.cache/cwal/colors.fish
