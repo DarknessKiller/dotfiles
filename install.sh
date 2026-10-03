@@ -126,11 +126,6 @@ brew_install yazi
 brew_install fzf
 brew_install opencode
 brew_install pi-coding-agent
-brew_install borders
-
-brew_install_from_tap \
-	mhaeuser/mhaeuser \
-	battery-toolkit
 
 brew_install_from_tap \
 	FelixKratz/formulae \
