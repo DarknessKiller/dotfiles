@@ -75,7 +75,7 @@ workspaceSwipeEnabled = true
 workspaceSwipeFingerCount = 4
 
 [hiddenBar]
-enabled = true
+enabled = false
 hiddenBundleIDs = []
 rehideIntervalSeconds = 5.0
 
