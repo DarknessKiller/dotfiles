@@ -21,7 +21,7 @@ abbr -a gcb git checkout -b
 abbr -a gl git log --oneline --graph --decorate --all
 
 # bitwarden
-if test -f ~/.bitwarden-ssh-agent.sock
+if test -S ~/.bitwarden-ssh-agent.sock
   export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
 end
 
