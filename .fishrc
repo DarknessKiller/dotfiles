@@ -20,7 +20,7 @@ abbr -a gco git checkout
 abbr -a gcb git checkout -b
 abbr -a gl git log --oneline --graph --decorate --all
 
-# homebrew bitwarden
+# bitwarden
 if test -f ~/.bitwarden-ssh-agent.sock
   export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
 end
@@ -29,7 +29,6 @@ end
 if test -S "$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
   export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 end
-
 
 # cwal
 if test -f ~/.cache/cwal/colors.fish
