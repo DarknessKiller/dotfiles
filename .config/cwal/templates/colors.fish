@@ -1,8 +1,8 @@
 set fish_color_autosuggestion 6c7086
 set fish_color_cancel f38ba8 '--reverse'
-set fish_color_command a6e3a1
+set fish_color_command {color1.strip}
 set fish_color_comment 6c7086
-set fish_color_cwd a6e3a1
+set fish_color_cwd {color1.strip}
 set fish_color_cwd_root f38ba8
 set fish_color_end f9e2af
 set fish_color_error f38ba8
@@ -20,7 +20,7 @@ set fish_color_redirection f5c2e7
 set fish_color_search_match --background={color1.strip}
 set fish_color_selection --background={color1.strip}
 set fish_color_status {color1.strip}
-set fish_color_user a6e3a1
+set fish_color_user {color1.strip}
 
 set fish_pager_color_background 1e1e2e
 set fish_pager_color_completion cdd6f4
@@ -39,8 +39,8 @@ set fish_pager_color_selected_prefix {color1.strip}
 # FZF colors
 export FZF_DEFAULT_OPTS="
     $FZF_DEFAULT_OPTS
-    --color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255
-    --color info:7,prompt:2,spinner:1,pointer:232,marker:1
+    --color fg:7,bg:0,hl:{color1.strip},fg+:232,bg+:{color1.strip},hl+:255
+    --color info:7,prompt:{color1.strip},spinner:{color1.strip},pointer:232,marker:{color1.strip}
 "
 
 # Fix LS_COLORS being unreadable.
