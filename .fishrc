@@ -1,13 +1,17 @@
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=nvim
+set -gx GOPATH $HOME/go
+set -gx PATH $GOPATH/bin:$PATH
+set -gx PATH $HOME/.local/bin:$PATH
+set -gx EDITOR nvim
 
 # my abbrs
 abbr -a pwdcp 'pwd | pbcopy'
 abbr -a hc 'history clear'
 abbr -a hcs 'history clear-session'
-abbr -a ts 'date +"%Y%m%d-%H%M%S"'
+
+# Timestamp helper
+abbr -a ts 'date +%Y%m%d-%H%M%S'
+
+# Editor shortcuts
 abbr -a vim 'nvim'
 abbr -a vi 'nvim'
 
@@ -22,7 +26,7 @@ abbr -a gl git log --oneline --graph --decorate --all
 
 # bitwarden
 if test -S ~/.bitwarden-ssh-agent.sock
-  export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+  set -gx SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
 end
 
 # appstore bitwarden
