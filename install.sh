@@ -35,33 +35,6 @@ link_if_new() {
 
 ## Installer starts here
 ########################################
-# Ensure paru exists
-########################################
-if ! command -v paru >/dev/null 2>&1; then
-	log "paru is not installed. Please install it first."
-	exit 1
-fi
-
-########################################
-# Arch Linux packages
-########################################
-log "Installing Arch packages"
-
-PACKAGES=(
-	fish
-	visual-studio-code-bin
-	zed
-	neovim
-	yazi
-	fzf
-	opencode
-	pi-coding-agent
-	ghostty
-)
-
-paru -S --needed "${PACKAGES[@]}"
-
-########################################
 # Fish (ensure available)
 ########################################
 log "Ensuring fish is installed"
