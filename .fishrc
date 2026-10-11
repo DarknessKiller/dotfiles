@@ -28,6 +28,9 @@ abbr -a gl git log --oneline --graph --decorate --all
 if test -S ~/.bitwarden-ssh-agent.sock
   set -gx SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
 end
+if test -S ~/snap/bitwarden/current/.bitwarden-ssh-agent.sock
+  set -gx SSH_AUTH_SOCK $HOME/snap/bitwarden/current/.bitwarden-ssh-agent.sock
+end
 
 # cwal
 if test -f ~/.cache/cwal/colors.fish
