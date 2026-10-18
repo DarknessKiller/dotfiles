@@ -124,8 +124,6 @@ brew_install fish
 brew_install neovim
 brew_install yazi
 brew_install fzf
-brew_install opencode
-brew_install pi-coding-agent
 
 brew_install_from_tap \
 	FelixKratz/formulae \
@@ -199,7 +197,6 @@ brew_cask_install ghostty
 brew_cask_install shottr
 brew_cask_install istat-menus
 brew_cask_install linearmouse
-brew_cask_install tabby
 brew_cask_install zed
 brew_cask_install vscodium
 brew_cask_install font-meslo-for-powerlevel10k
