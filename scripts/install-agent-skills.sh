@@ -47,7 +47,7 @@ if command -v npx >/dev/null 2>&1; then
 
   if npx -y skills@latest add mattpocock/skills \
     -g \
-    -s grill-with-docs grill-me grilling handoff teach wait-what writing-for-agents \
+    -s grill-with-docs grill-me grilling handoff teach wait-what writing-for-agents code-review codebase-design domain-modeling tdd implement improve-codebase-architecture retro  \
     -y \
     --full-depth; then
     log "Matt Pocock skills installed"
