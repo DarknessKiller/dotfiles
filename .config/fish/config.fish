@@ -7,8 +7,12 @@ if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
 end
 
 # User functions
-if test -f ~/.config/fish/functions.fish
-source ~/.config/fish/functions.fish
+if test -f ~/.config/fish/bitwarden.fish
+source ~/.config/fish/bitwarden.fish
+end
+
+if test -f ~/.config/fish/claudex.fish
+source ~/.config/fish/claudex.fish
 end
 
 # User configuration

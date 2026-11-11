@@ -109,8 +109,12 @@ if command -v fish >/dev/null 2>&1; then
 		"$HOME/.config/fish/config.fish"
 
 	link_if_new \
-		"$DOTFILES_DIR/fish/functions.fish" \
-		"$HOME/.config/fish/functions.fish"
+		"$DOTFILES_DIR/fish/bitwarden.fish" \
+		"$HOME/.config/fish/bitwarden.fish"
+
+	link_if_new \
+		"$DOTFILES_DIR/fish/claudex.fish" \
+		"$HOME/.config/fish/claudex.fish"
 
 	link_if_new \
 		"$REPO_DIR/.fishrc" \
