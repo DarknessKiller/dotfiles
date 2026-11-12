@@ -28,6 +28,7 @@ function claudex
                     "ANTHROPIC_AUTH_TOKEN": "'$OMNIROUTE_API_KEY'",
                     "ANTHROPIC_BASE_URL": "'$OMNIROUTE_BASE_URL'",
                     "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+                    "ANTHROPIC_CUSTOM_HEADERS": "x-omniroute-compression: allow-lossy",
                     "API_TIMEOUT_MS": "600000",
                     "BASH_DEFAULT_TIMEOUT_MS": "600000",
                     "BASH_MAX_TIMEOUT_MS": "600000",
